@@ -42,7 +42,7 @@ describe IdnowRuby::Identification do
       end
 
       it { expect(identification.id).to be nil }
-      it { expect(identification.errors?).to be true }
+      it { expect(identification.errors?).to be false }
     end
   end
 end
