@@ -1,8 +1,6 @@
 # IdnowRuby
+Library to consume the IDnow API in Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/idnow_ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -21,21 +19,54 @@ Or install it yourself as:
     $ gem install idnow_ruby
 
 ## Usage
+First instantiate the identifier:
 
-TODO: Write usage instructions here
+```ruby
+identifier = IdnowRuby::Identifier.new(host: host, company_id: company_id, api_key: api_key)
+```
+From the IDnow API documentation, the possible hosts are:
+
+- Live server `gateway.idnow.de`- Test server `gateway.test.idnow.de`
+
+`company_id` uniquely identifies your company as provided by IDnow during your account setup
+
+Then, identification requests the be performed:
+`identifier.start(transaction_number, identification_data)`
+
+`transaction number` is used to identify the requested identification. This ID should be used by as a key to assign the identification to an internal customer data set.
+
+`identification_data` stores the user's details. An example with all the possible attributes is: 
+
+```
+ IdnowRuby::IdentificationData.new({ 
+    birthday: '1984-07-20',
+    birthplace: 'Buxtehude',
+    birthname: 'Meier',
+    city: 'Berlin',
+    country: 'DE',
+    custom1: 'first custom parameter',
+    custom2: 'second custom parameter',
+    custom3: 'third custom parameter',
+    custom4: 'fourth custom parameter',
+    custom5: 'fifth custom parameter',
+    trackingid: 'track123',
+    email: 'petra.meier@example.com',
+    firstname: 'Petra',
+    gender: 'FEMALE',
+    lastname: 'Meier',
+    nationality: 'DE',
+    street: 'Sesamstraße',
+    streetnumber: '34c',
+    title: 'Prof. Dr. Dr. hc',
+    zipcode: '10439'
+ })
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Rspec is used for testing.
+To enable code coverage check, set COV environment variable:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+`COV=true bundle exec rspec`
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/idnow_ruby.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 

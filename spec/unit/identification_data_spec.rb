@@ -5,22 +5,22 @@ describe IdnowRuby::IdentificationData do
   let(:params) { Hash.new }
 
   describe '#to_json' do
-    subject{ object.to_json }
+    subject { object.to_json }
 
     context 'when no data is given' do
       it { is_expected.to eq '{}' }
     end
 
     context 'when valid data is given' do
-      let(:params) { {city: 'Berlin', birthday: '30.10.1983'} }
+      let(:params) { { city: 'Berlin', birthday: '30.10.1983' } }
 
-      it { is_expected.to eq "{\"birthday\":\"1983-10-30\",\"city\":\"Berlin\"}" }
+      it { is_expected.to eq '{"birthday":"1983-10-30","city":"Berlin"}' }
     end
 
     context 'when invalid attribute is passed' do
-      let(:params) { {invalid_attribute: 'some value'} }
+      let(:params) { { invalid_attribute: 'some value' } }
 
-      it { expect{ subject }.to raise_error(ArgumentError) }
+      it { expect { subject }.to raise_error(ArgumentError) }
     end
   end
 
@@ -46,7 +46,7 @@ describe IdnowRuby::IdentificationData do
     end
 
     it 'throws an error if no proper date is given' do
-      expect{ object.birthday = 'some random string' }.to raise_error(ArgumentError)
+      expect { object.birthday = 'some random string' }.to raise_error(ArgumentError)
     end
   end
 
@@ -66,7 +66,7 @@ describe IdnowRuby::IdentificationData do
     end
 
     it 'throws an error if no proper country code is given' do
-      expect{ object.country = 'abc' }.to raise_error(ArgumentError)
+      expect { object.country = 'abc' }.to raise_error(ArgumentError)
     end
   end
 
@@ -89,10 +89,8 @@ describe IdnowRuby::IdentificationData do
       end
     end
 
-    context "when gender is set to invalid value" do
-      it { expect{ object.gender = 'hybrid' }.to raise_error(ArgumentError) }
+    context 'when gender is set to invalid value' do
+      it { expect { object.gender = 'hybrid' }.to raise_error(ArgumentError) }
     end
-
   end
-
 end

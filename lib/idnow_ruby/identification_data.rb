@@ -2,7 +2,6 @@ require 'json'
 
 module IdnowRuby
   class IdentificationData
-
     VALID_ATTRIBUTES = [:birthday,
                         :birthplace,
                         :birthname,
@@ -23,27 +22,27 @@ module IdnowRuby
                         :street,
                         :streetnumber,
                         :title,
-                        :zipcode]
+                        :zipcode].freeze
 
     module Gender
-      MALE = 'MALE'
-      FEMALE = 'FEMALE'
+      MALE = 'MALE'.freeze
+      FEMALE = 'FEMALE'.freeze
     end
 
     attr_accessor *VALID_ATTRIBUTES
 
     def initialize(params = {})
       params.keys.each do |key|
-        raise ArgumentError, "Attribute #{key} is not supported!" unless VALID_ATTRIBUTES.include?(key.to_sym)
+        fail ArgumentError, "Attribute #{key} is not supported!" unless VALID_ATTRIBUTES.include?(key.to_sym)
 
-        self.send("#{key}=", params[key])
+        send("#{key}=", params[key])
       end
     end
 
     def to_json
       result = {}
       VALID_ATTRIBUTES.each do |attribute|
-        result.merge!({attribute => self.send(attribute)}) if self.send(attribute)
+        result[attribute] = send(attribute) if send(attribute)
       end
       result.to_json
     end
@@ -51,19 +50,19 @@ module IdnowRuby
     ########### Getter / Setter ############
 
     def birthday
-      @birthday.strftime("%Y-%m-%d") if @birthday
+      @birthday.strftime('%Y-%m-%d') if @birthday
     end
 
     def birthday=(birthday)
       @birthday = if birthday.instance_of?(Date) || birthday.instance_of?(DateTime)
-        birthday
-      else
-        Date.parse(birthday)
-      end
+                    birthday
+                  else
+                    Date.parse(birthday)
+                  end
     end
 
     def country=(country)
-      raise ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
+      fail ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
 
       @country = country.upcase
     end
@@ -74,7 +73,7 @@ module IdnowRuby
       elsif %w(F FEMALE).include?(gender.to_s.strip.upcase)
         @gender = Gender::FEMALE
       else
-        raise ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
+        fail ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
       end
     end
   end
