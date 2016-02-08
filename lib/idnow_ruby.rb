@@ -1,19 +1,45 @@
-require "idnow_ruby/version"
+require 'idnow_ruby/version'
+require 'idnow_ruby/identifier'
+require 'idnow_ruby/http_client'
+require 'idnow_ruby/response'
+require 'idnow_ruby/post_request'
+require 'idnow_ruby/identification_data'
 
+# TODO, rename to Idnow and identifier to client
 module IdnowRuby
-  autoload :Identification, 'idnow_ruby/identification'
-  autoload :IdentificationData, 'idnow_ruby/identification_data'
-  autoload :Configuration, 'idnow_ruby/configuration'
+  extend self
 
-  class << self
-    def configure
-      yield configuration
+  attr_reader :host, :company_id, :api_key
+
+  TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
+  LIVE_SERVER = 'https://gateway.idnow.de'.freeze
+
+  def env=(env)
+    if env == :test
+      @identifier = nil
+      @host = TEST_SERVER
+    elsif env == :live
+      @identifier = nil
+      @host = LIVE_SERVER
+    else
+      fail ArgumentError, 'Plese provide a valid enviroment, :test or :production'
     end
+  end
 
-    def configuration
-      @configuration ||= IdnowRuby::Configuration.new
-    end
+  def company_id=(company_id)
+    @identifier = nil
+    @company_id = company_id
+  end
 
-    alias :config :configuration
+  def api_key=(api_key)
+    @identifier = nil
+    @api_key = api_key
+  end
+
+  def identifier
+    fail 'Please set your company_id' if company_id.nil?
+    fail 'Please set your api_key' if api_key.nil?
+    fail 'Please set env to :test or :live' if host.nil?
+    @identifier ||= IdnowRuby::Identifier.new(host: host, company_id: company_id, api_key: api_key)
   end
 end

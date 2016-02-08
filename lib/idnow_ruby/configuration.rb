@@ -1,22 +1,25 @@
 module IdnowRuby
   class Configuration
+    # TODO: This class is not being used right now, but its aim is to be able for the developers
+    # using the gem to set its configuration with something like
+    # Idnow.config do |config|
+    # config.url = IdnowRuby::TEST_SERVER
+    # config.env = :test
+    # config.company_id = company_id
+    # end
 
     attr_accessor :api_key
 
     attr_accessor :company_id
 
-    module IdnowRuby::Host
-      TEST = 'https://gateway.test.idnow.de'
-      PRODUCTION = 'https://gateway.idnow.de'
+    module IdnowRuby
+      module Host
+        TEST = 'https://gateway.test.idnow.de'.freeze
+        PRODUCTION = 'https://gateway.idnow.de'.freeze
+      end
     end
     attr_accessor :host
 
     attr_accessor :api_version
-
-    def initialize
-      self.host         = IdnowRuby::Host::PRODUCTION
-      self.api_version  = 'v1'
-    end
-
   end
 end
