@@ -22,7 +22,7 @@ module IdnowRuby
       @identifier = nil
       @host = LIVE_SERVER
     else
-      fail ArgumentError, 'Plese provide a valid enviroment, :test or :production'
+      fail ArgumentError, 'Please provide a valid enviroment, :test or :live'
     end
   end
 
@@ -34,6 +34,11 @@ module IdnowRuby
   def api_key=(api_key)
     @identifier = nil
     @api_key = api_key
+  end
+
+  def test_env?
+    fail 'Please set env to :test or :live' if host.nil?
+    IdnowRuby.host.include?('test')
   end
 
   def identifier

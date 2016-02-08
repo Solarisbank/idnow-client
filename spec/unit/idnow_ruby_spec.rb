@@ -75,6 +75,30 @@ describe IdnowRuby do
     end
   end
 
+  describe '.test_env?' do
+    subject { IdnowRuby.test_env? }
+    context 'when no env was set' do
+      before do
+        IdnowRuby.instance_variable_set(:@host, nil)
+      end
+      it { expect { subject }.to raise_error(RuntimeError, 'Please set env to :test or :live') }
+    end
+
+    context 'when env was set to :test' do
+      before do
+        IdnowRuby.env = :test
+      end
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when env was set to :live' do
+      before do
+        IdnowRuby.env = :live
+      end
+      it { is_expected.to be_falsey }
+    end
+  end
+
   describe '.identifier' do
     subject { IdnowRuby.identifier }
 

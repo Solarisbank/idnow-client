@@ -17,5 +17,10 @@ module IdnowRuby
     def errors?
       !errors.nil?
     end
+
+    def redirect_url
+      return nil if errors?
+      IdnowRuby.test_env? ? "https://go.test.idnow.de/#{id}" : "https://go.idnow.de/#{id}"
+    end
   end
 end

@@ -19,7 +19,7 @@ Or install it yourself as:
     $ gem install idnow_ruby
 
 ## Usage
-Configurate IdnowRuby setting `env`, `company` and `api_key`.
+Configurate IdnowRuby setting `env`, `company_id` and `api_key`.
 
 `env` can be set to `:live` or `:test`. Following the IDnow API documentation, each of these environments will correspondingly set the host to:
 
@@ -31,7 +31,7 @@ Example
 
 ```ruby
 IdnowRuby.env = :test
-IdnowRuby.company = "mycompany"
+IdnowRuby.company_id = "mycompany"
 IdnowRuby.api_key = "1234api_key"
 ```
 

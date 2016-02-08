@@ -17,7 +17,7 @@ module IdnowRuby
     private
 
     def path(transaction_number)
-      File.join('/api', API_VERSION, @company_id, 'identifications', transaction_number, 'start')
+      File.join('/api', API_VERSION, @company_id, 'identifications', transaction_number.to_s, 'start')
     end
   end
 end
