@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['joan.martinez@hitfoxgroup']
 
   spec.summary       = 'Ruby client for the IDnow API'
-  spec.description   = 'Library to consume the IDnow API in Ruby'
+  spec.description   = 'Library to consume the IDnow API in Ruby, http://www.idnow.eu/developers'
   spec.homepage      = 'http://example.com'
   spec.license       = 'MIT'
 

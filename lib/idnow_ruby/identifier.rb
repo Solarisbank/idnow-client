@@ -1,7 +1,5 @@
 module IdnowRuby
   class Identifier
-    TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
-    LIVE_SERVER = 'https://gateway.idnow.de'.freeze
     API_VERSION = 'v1'.freeze
 
     def initialize(host:, company_id:, api_key:)

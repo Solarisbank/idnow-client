@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe IdnowRuby::Identifier do
   let(:identifier) { IdnowRuby::Identifier.new(host: host, company_id: company_id, api_key: api_key) }
-  let(:host) { IdnowRuby::Identifier::TEST_SERVER }
+  let(:host) { IdnowRuby::TEST_SERVER }
   let(:company_id) { 'solaris' }
   let(:api_key) { 'api_key' }
   let(:transaction_number) { '1234567890' }

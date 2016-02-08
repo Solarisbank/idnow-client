@@ -1,5 +1,5 @@
 # IdnowRuby
-Library to consume the IDnow API in Ruby
+Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 
 
 ## Installation
@@ -19,19 +19,24 @@ Or install it yourself as:
     $ gem install idnow_ruby
 
 ## Usage
-First instantiate the identifier:
+Configurate IdnowRuby setting `env`, `company` and `api_key`.
 
-```ruby
-identifier = IdnowRuby::Identifier.new(host: host, company_id: company_id, api_key: api_key)
-```
-From the IDnow API documentation, the possible hosts are:
+`env` can be set to `:live` or `:test`. Following the IDnow API documentation, each of these environments will correspondingly set the host to:
 
 - Live server `gateway.idnow.de`- Test server `gateway.test.idnow.de`
 
 `company_id` uniquely identifies your company as provided by IDnow during your account setup
 
-Then, identification requests the be performed:
-`identifier.start(transaction_number, identification_data)`
+Example
+
+```ruby
+IdnowRuby.env = :test
+IdnowRuby.company = "mycompany"
+IdnowRuby.api_key = "1234api_key"
+```
+
+Then, identification requests can be performed:
+`IdnowRuby.identifier.start(transaction_number, identification_data)`
 
 `transaction number` is used to identify the requested identification. This ID should be used by as a key to assign the identification to an internal customer data set.
 
