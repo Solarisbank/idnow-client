@@ -4,23 +4,33 @@ require 'idnow_ruby/http_client'
 require 'idnow_ruby/response'
 require 'idnow_ruby/post_request'
 require 'idnow_ruby/identification_data'
+require 'idnow_ruby/exception'
 
 # TODO, rename to Idnow and identifier to client
 module IdnowRuby
   extend self
 
-  attr_reader :host, :company_id, :api_key
+  attr_reader :host, :target_host, :company_id, :api_key
 
-  TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
-  LIVE_SERVER = 'https://gateway.idnow.de'.freeze
+  module Host #Used to request an identification through the idnow API
+    TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
+    LIVE_SERVER = 'https://gateway.idnow.de'.freeze
+  end
+
+  module TargetHost #Used for redirecting the user to the identification process
+    TEST_SERVER = 'https://go.test.idnow.de'.freeze
+    LIVE_SERVER = 'https://go.idnow.de'.freeze
+  end
 
   def env=(env)
     if env == :test
       @identifier = nil
-      @host = TEST_SERVER
+      @host = Host::TEST_SERVER
+      @target_host = TargetHost::TEST_SERVER
     elsif env == :live
       @identifier = nil
-      @host = LIVE_SERVER
+      @host = Host::LIVE_SERVER
+      @target_host = TargetHost::LIVE_SERVER
     else
       fail ArgumentError, 'Please provide a valid enviroment, :test or :live'
     end
