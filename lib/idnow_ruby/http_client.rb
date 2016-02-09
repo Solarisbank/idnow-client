@@ -7,7 +7,12 @@ module IdnowRuby
 
     def execute(request)
       request['X-API-KEY'] = @api_key
-      client.request(request)
+      begin
+        client.request(request)
+      rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+        raise IdnowRuby::Exception, e
+      end
     end
 
     private

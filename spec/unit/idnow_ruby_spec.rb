@@ -8,6 +8,7 @@ describe IdnowRuby do
   describe '.env=' do
     before do
       IdnowRuby.instance_variable_set(:@host, 'http://any-host.com')
+      IdnowRuby.instance_variable_set(:@target_host, 'http://any-redirect-host.com')
     end
     subject { IdnowRuby.env = env }
 
@@ -17,8 +18,11 @@ describe IdnowRuby do
         IdnowRuby.instance_variable_set(:@identifier, 'dummy')
         expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
       end
-      it 'sets the host to IdnowRuby::TEST_SERVER' do
-        expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::TEST_SERVER)
+      it 'sets the host to IdnowRuby::Host::TEST_SERVER' do
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::Host::TEST_SERVER)
+      end
+      it 'sets the target_host to IdnowRuby::TargetHost::TEST_SERVER' do
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@target_host) }.to(IdnowRuby::TargetHost::TEST_SERVER)
       end
     end
 
@@ -28,8 +32,11 @@ describe IdnowRuby do
         IdnowRuby.instance_variable_set(:@identifier, 'dummy')
         expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
       end
-      it 'sets the host to IdnowRuby::TEST_SERVER' do
-        expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::LIVE_SERVER)
+      it 'sets the host to IdnowRuby::Host::LIVE_SERVER' do
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::Host::LIVE_SERVER)
+      end
+      it 'sets the target_host to IdnowRuby::TargetHost::LIVE_SERVER' do
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@target_host) }.to(IdnowRuby::TargetHost::LIVE_SERVER)
       end
     end
 

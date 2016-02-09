@@ -13,7 +13,8 @@ RSpec.describe IdnowRuby::Response do
                                   }]
                                 }'
   end
-  let(:idnow_response) { IdnowRuby::Response.new(response) }
+  let(:transaction_number) { 12_345 }
+  let(:idnow_response) { IdnowRuby::Response.new(response, transaction_number) }
 
   describe '#new' do
     let(:response) { successful_raw_response }
@@ -80,27 +81,21 @@ RSpec.describe IdnowRuby::Response do
 
   describe '#redirect_url' do
     subject { idnow_response.redirect_url }
-    context 'of a response with errors' do
-      let(:response) { failure_raw_response }
-      it { is_expected.to be nil }
-    end
-    context 'of a successful response' do
-      let(:response) { successful_raw_response }
-      context 'when env is :test' do
-        before do
-          IdnowRuby.env = :test
-        end
-        it 'returns a test redirect url' do
-          expect(subject).to eq "https://go.test.idnow.de/#{successful_id}"
-        end
+    let(:response) { successful_raw_response }
+    context 'when env is :test' do
+      before do
+        IdnowRuby.env = :test
       end
-      context 'when env is :live' do
-        before do
-          IdnowRuby.env = :live
-        end
-        it 'returns a live redirect url' do
-          expect(subject).to eq "https://go.idnow.de/#{successful_id}"
-        end
+      it 'returns a test redirect url' do
+        expect(subject).to eq "https://go.test.idnow.de/#{IdnowRuby.company_id}/identifications/#{transaction_number}/identification/start"
+      end
+    end
+    context 'when env is :live' do
+      before do
+        IdnowRuby.env = :live
+      end
+      it 'returns a live redirect url' do
+        expect(subject).to eq "https://go.idnow.de/#{IdnowRuby.company_id}/identifications/#{transaction_number}/identification/start"
       end
     end
   end

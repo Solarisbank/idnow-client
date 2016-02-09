@@ -11,7 +11,7 @@ module IdnowRuby
       path = path(transaction_number)
       request = IdnowRuby::PostRequest.new(path, identification_data)
       response = @http_client.execute(request)
-      IdnowRuby::Response.new(response.body)
+      IdnowRuby::Response.new(response.body, transaction_number)
     end
 
     private

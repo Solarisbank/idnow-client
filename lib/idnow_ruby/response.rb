@@ -2,8 +2,9 @@ require 'json'
 
 module IdnowRuby
   class Response
-    def initialize(raw_response)
+    def initialize(raw_response, transaction_number)
       @data = JSON.parse(raw_response)
+      @transaction_number = transaction_number
     end
 
     def id
@@ -19,8 +20,7 @@ module IdnowRuby
     end
 
     def redirect_url
-      return nil if errors?
-      IdnowRuby.test_env? ? "https://go.test.idnow.de/#{id}" : "https://go.idnow.de/#{id}"
+      "#{IdnowRuby.target_host}/#{IdnowRuby.company_id}/identifications/#{@transaction_number}/identification/start"
     end
   end
 end
