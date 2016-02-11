@@ -39,7 +39,25 @@ describe IdnowRuby::Identifier do
           .to_raise(Timeout::Error)
       end
 
-      it { expect { subject }.to raise_error(IdnowRuby::Exception) }
+      it { expect { subject }.to raise_error(IdnowRuby::ConnectionException) }
+    end
+
+    context 'when the request to idnow returns errros' do
+      let!(:request) do
+        stub_request(:post, "#{host}/api/v1/#{company_id}/identifications/#{transaction_number}/start")
+          .with(body: body,
+                headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Key' => api_key.to_s })
+          .to_return(status: 400, body: '{ "errors": [{
+                                                "cause": "INVALID_LOGIN_TOKEN",
+                                                "id": "487800773",
+                                                "key": null,
+                                                "message": null
+                                           }]
+                                         }'
+                    )
+      end
+
+      it { expect { subject }.to raise_error(IdnowRuby::ResponseException) }
     end
   end
 end

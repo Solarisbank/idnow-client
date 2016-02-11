@@ -11,7 +11,7 @@ module IdnowRuby
         client.request(request)
       rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
              Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
-        raise IdnowRuby::Exception, e
+        raise IdnowRuby::ConnectionException, e
       end
     end
 
