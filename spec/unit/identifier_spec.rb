@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-RSpec.describe IdnowRuby::Identifier do
-  let(:identifier) { IdnowRuby::Identifier.new(args) }
+RSpec.describe IdnowRuby::Client do
+  let(:client) { IdnowRuby::Client.new(args) }
   let(:args) { { company_id: 'sun', host: 'host', api_key: 'api_key' } }
 
   describe '#new' do
-    subject { identifier }
+    subject { client }
 
     context 'with no host' do
       let(:args) { { company_id: 1, api_key: 'api_key' } }

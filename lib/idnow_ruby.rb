@@ -1,12 +1,12 @@
 require 'idnow_ruby/version'
-require 'idnow_ruby/identifier'
+require 'idnow_ruby/client'
 require 'idnow_ruby/http_client'
 require 'idnow_ruby/response'
 require 'idnow_ruby/post_request'
 require 'idnow_ruby/identification_data'
+require 'idnow_ruby/login_data'
 require 'idnow_ruby/exception'
 
-# TODO, rename to Idnow and identifier to client
 module IdnowRuby
   extend self
 
@@ -24,11 +24,11 @@ module IdnowRuby
 
   def env=(env)
     if env == :test
-      @identifier = nil
+      @client = nil
       @host = Host::TEST_SERVER
       @target_host = TargetHost::TEST_SERVER
     elsif env == :live
-      @identifier = nil
+      @client = nil
       @host = Host::LIVE_SERVER
       @target_host = TargetHost::LIVE_SERVER
     else
@@ -37,12 +37,12 @@ module IdnowRuby
   end
 
   def company_id=(company_id)
-    @identifier = nil
+    @client = nil
     @company_id = company_id
   end
 
   def api_key=(api_key)
-    @identifier = nil
+    @client = nil
     @api_key = api_key
   end
 
@@ -51,10 +51,10 @@ module IdnowRuby
     IdnowRuby.host.include?('test')
   end
 
-  def identifier
+  def client
     fail 'Please set your company_id' if company_id.nil?
     fail 'Please set your api_key' if api_key.nil?
     fail 'Please set env to :test or :live' if host.nil?
-    @identifier ||= IdnowRuby::Identifier.new(host: host, company_id: company_id, api_key: api_key)
+    @client ||= IdnowRuby::Client.new(host: host, company_id: company_id, api_key: api_key)
   end
 end

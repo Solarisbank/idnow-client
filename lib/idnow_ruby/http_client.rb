@@ -1,5 +1,7 @@
 module IdnowRuby
   class HttpClient
+    attr_reader :api_key
+
     def initialize(host:, api_key:)
       @uri = URI.parse(host)
       @api_key = api_key

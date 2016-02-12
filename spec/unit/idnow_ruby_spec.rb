@@ -14,9 +14,9 @@ describe IdnowRuby do
 
     context 'if :test env is given' do
       let(:env) { :test }
-      it 'resets identifier' do
-        IdnowRuby.instance_variable_set(:@identifier, 'dummy')
-        expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
+      it 'resets client' do
+        IdnowRuby.instance_variable_set(:@client, 'dummy')
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@client) }.to(nil)
       end
       it 'sets the host to IdnowRuby::Host::TEST_SERVER' do
         expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::Host::TEST_SERVER)
@@ -28,9 +28,9 @@ describe IdnowRuby do
 
     context 'if :live env is given' do
       let(:env) { :live }
-      it 'resets identifier' do
-        IdnowRuby.instance_variable_set(:@identifier, 'dummy')
-        expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
+      it 'resets client' do
+        IdnowRuby.instance_variable_set(:@client, 'dummy')
+        expect { subject }.to change { IdnowRuby.instance_variable_get(:@client) }.to(nil)
       end
       it 'sets the host to IdnowRuby::Host::LIVE_SERVER' do
         expect { subject }.to change { IdnowRuby.instance_variable_get(:@host) }.to(IdnowRuby::Host::LIVE_SERVER)
@@ -54,9 +54,9 @@ describe IdnowRuby do
 
     let(:company_id) { 'somecompany' }
 
-    it 'resets identifier' do
-      IdnowRuby.instance_variable_set(:@identifier, 'dummy')
-      expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
+    it 'resets client' do
+      IdnowRuby.instance_variable_set(:@client, 'dummy')
+      expect { subject }.to change { IdnowRuby.instance_variable_get(:@client) }.to(nil)
     end
 
     it 'sets company_id' do
@@ -72,9 +72,9 @@ describe IdnowRuby do
 
     let(:api_key) { 'api_key' }
 
-    it 'resets identifier' do
-      IdnowRuby.instance_variable_set(:@identifier, 'dummy')
-      expect { subject }.to change { IdnowRuby.instance_variable_get(:@identifier) }.to(nil)
+    it 'resets client' do
+      IdnowRuby.instance_variable_set(:@client, 'dummy')
+      expect { subject }.to change { IdnowRuby.instance_variable_get(:@client) }.to(nil)
     end
 
     it 'sets api_key' do
@@ -106,8 +106,8 @@ describe IdnowRuby do
     end
   end
 
-  describe '.identifier' do
-    subject { IdnowRuby.identifier }
+  describe '.client' do
+    subject { IdnowRuby.client }
 
     context 'if company_id is not set' do
       before do
@@ -141,14 +141,14 @@ describe IdnowRuby do
         IdnowRuby.env = :test
         IdnowRuby.company_id = 'somecompany'
         IdnowRuby.api_key = 'some key'
-        IdnowRuby.instance_variable_set(:@identifier, nil)
+        IdnowRuby.instance_variable_set(:@client, nil)
       end
 
-      it { is_expected.to be_a(IdnowRuby::Identifier) }
+      it { is_expected.to be_a(IdnowRuby::Client) }
 
-      it 'memoizes the identifier' do
-        expect(IdnowRuby::Identifier).to receive(:new).once.and_call_original
-        2.times { IdnowRuby.identifier }
+      it 'memoizes the client' do
+        expect(IdnowRuby::Client).to receive(:new).once.and_call_original
+        2.times { IdnowRuby.client }
       end
     end
   end
