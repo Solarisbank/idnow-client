@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe IdnowRuby::IdentificationData do
-  let(:object) { IdnowRuby::IdentificationData.new(params) }
+describe Idnow::IdentificationData do
+  let(:object) { Idnow::IdentificationData.new(params) }
   let(:params) { Hash.new }
 
   describe '#to_json' do

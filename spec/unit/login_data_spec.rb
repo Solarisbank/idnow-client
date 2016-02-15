@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe IdnowRuby::LoginData do
-  let(:login_data) { IdnowRuby::LoginData.new(api_key) }
+describe Idnow::LoginData do
+  let(:login_data) { Idnow::LoginData.new(api_key) }
   let(:api_key) { '12445' }
 
   describe '#to_json' do

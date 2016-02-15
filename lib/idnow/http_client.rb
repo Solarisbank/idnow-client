@@ -1,4 +1,4 @@
-module IdnowRuby
+module Idnow
   class HttpClient
     attr_reader :api_key
 
@@ -7,13 +7,15 @@ module IdnowRuby
       @api_key = api_key
     end
 
-    def execute(request)
-      request['X-API-KEY'] = @api_key
+    def execute(request, headers = {})
+      headers.each do |k, v|
+        request[k] = v
+      end
       begin
         client.request(request)
       rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
              Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
-        raise IdnowRuby::ConnectionException, e
+        raise Idnow::ConnectionException, e
       end
     end
 

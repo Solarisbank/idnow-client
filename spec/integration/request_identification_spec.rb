@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe IdnowRuby::Client do
-  let(:client) { IdnowRuby::Client.new(host: host, company_id: company_id, api_key: api_key) }
-  let(:host) { IdnowRuby::Host::TEST_SERVER }
+describe Idnow::Client do
+  let(:client) { Idnow::Client.new(host: host, company_id: company_id, api_key: api_key) }
+  let(:host) { Idnow::Host::TEST_SERVER }
   let(:company_id) { 'solaris' }
   let(:api_key) { 'api_key' }
   let(:transaction_number) { '1234567890' }
@@ -46,7 +46,7 @@ describe IdnowRuby::Client do
                     )
       end
 
-      it { expect { subject }.to raise_error(IdnowRuby::ResponseException) }
+      it { expect { subject }.to raise_error(Idnow::ResponseException) }
     end
   end
 end

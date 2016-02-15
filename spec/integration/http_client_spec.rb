@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe IdnowRuby::HttpClient do
-  let(:http_client) { IdnowRuby::HttpClient.new(host: host, api_key: api_key) }
-  let(:post_request) { IdnowRuby::PostRequest.new(path, {}) }
+describe Idnow::HttpClient do
+  let(:http_client) { Idnow::HttpClient.new(host: host, api_key: api_key) }
+  let(:post_request) { Idnow::PostRequest.new(path, {}) }
   let(:path) { "#{host}/some/path" }
-  let(:host) { IdnowRuby::Host::TEST_SERVER }
+  let(:host) { Idnow::Host::TEST_SERVER }
   let(:api_key) { 'api_key' }
 
   describe '#execute' do
@@ -13,7 +13,7 @@ describe IdnowRuby::HttpClient do
       let!(:request) do
         stub_request(:post, path)
           .with(body: '{}',
-                headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Key' => api_key.to_s })
+                headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
           .to_return(status: 200, body: '{ "authToken": "nekoThtua"}', headers: {})
       end
 
@@ -27,11 +27,11 @@ describe IdnowRuby::HttpClient do
       let!(:request) do
         stub_request(:post, path)
           .with(body: '{}',
-                headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Key' => api_key.to_s })
+                headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
           .to_raise(Timeout::Error)
       end
 
-      it { expect { subject }.to raise_error(IdnowRuby::ConnectionException) }
+      it { expect { subject }.to raise_error(Idnow::ConnectionException) }
     end
   end
 end

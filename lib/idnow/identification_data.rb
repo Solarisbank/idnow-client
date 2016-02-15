@@ -1,6 +1,6 @@
 require 'json'
 
-module IdnowRuby
+module Idnow
   class IdentificationData
     VALID_ATTRIBUTES = [:birthday,
                         :birthplace,
@@ -33,7 +33,7 @@ module IdnowRuby
 
     def initialize(params = {})
       params.keys.each do |key|
-        fail ArgumentError, "Attribute #{key} is not supported!" unless VALID_ATTRIBUTES.include?(key.to_sym)
+        raise ArgumentError, "Attribute #{key} is not supported!" unless VALID_ATTRIBUTES.include?(key.to_sym)
 
         send("#{key}=", params[key])
       end
@@ -62,7 +62,7 @@ module IdnowRuby
     end
 
     def country=(country)
-      fail ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
+      raise ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
 
       @country = country.upcase
     end
@@ -73,7 +73,7 @@ module IdnowRuby
       elsif %w(F FEMALE).include?(gender.to_s.strip.upcase)
         @gender = Gender::FEMALE
       else
-        fail ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
+        raise ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
       end
     end
   end

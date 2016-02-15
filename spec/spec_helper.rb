@@ -5,7 +5,7 @@ if ENV['COV']
   SimpleCov.start
 end
 
-require 'idnow_ruby'
+require 'idnow'
 require 'rspec'
 
 require 'factory_girl'

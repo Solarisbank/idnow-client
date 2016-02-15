@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe IdnowRuby::Client do
-  let(:client) { IdnowRuby::Client.new(args) }
+RSpec.describe Idnow::Client do
+  let(:client) { Idnow::Client.new(args) }
   let(:args) { { company_id: 'sun', host: 'host', api_key: 'api_key' } }
 
   describe '#new' do

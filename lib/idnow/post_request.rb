@@ -1,7 +1,7 @@
 # require 'json'
 require 'net/http'
 
-module IdnowRuby
+module Idnow
   class PostRequest < Net::HTTP::Post
     def initialize(path, data)
       super(path)

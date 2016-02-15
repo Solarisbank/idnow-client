@@ -1,13 +1,17 @@
-require 'idnow_ruby/version'
-require 'idnow_ruby/client'
-require 'idnow_ruby/http_client'
-require 'idnow_ruby/response'
-require 'idnow_ruby/post_request'
-require 'idnow_ruby/identification_data'
-require 'idnow_ruby/login_data'
-require 'idnow_ruby/exception'
+require 'idnow/version'
+require 'idnow/client'
+require 'idnow/http_client'
+require 'idnow/responses/generic'
+require 'idnow/responses/login'
+require 'idnow/responses/start_identification'
+require 'idnow/responses/identifications'
+require 'idnow/post_request'
+require 'idnow/get_request'
+require 'idnow/identification_data'
+require 'idnow/login_data'
+require 'idnow/exception'
 
-module IdnowRuby
+module Idnow
   extend self
 
   attr_reader :host, :target_host, :company_id, :api_key
@@ -32,7 +36,7 @@ module IdnowRuby
       @host = Host::LIVE_SERVER
       @target_host = TargetHost::LIVE_SERVER
     else
-      fail ArgumentError, 'Please provide a valid enviroment, :test or :live'
+      raise ArgumentError, 'Please provide a valid enviroment, :test or :live'
     end
   end
 
@@ -47,14 +51,14 @@ module IdnowRuby
   end
 
   def test_env?
-    fail 'Please set env to :test or :live' if host.nil?
-    IdnowRuby.host.include?('test')
+    raise 'Please set env to :test or :live' if host.nil?
+    Idnow.host.include?('test')
   end
 
   def client
-    fail 'Please set your company_id' if company_id.nil?
-    fail 'Please set your api_key' if api_key.nil?
-    fail 'Please set env to :test or :live' if host.nil?
-    @client ||= IdnowRuby::Client.new(host: host, company_id: company_id, api_key: api_key)
+    raise 'Please set your company_id' if company_id.nil?
+    raise 'Please set your api_key' if api_key.nil?
+    raise 'Please set env to :test or :live' if host.nil?
+    @client ||= Idnow::Client.new(host: host, company_id: company_id, api_key: api_key)
   end
 end

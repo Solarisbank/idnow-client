@@ -1,6 +1,6 @@
 require 'json'
 
-module IdnowRuby
+module Idnow
   class LoginData
     def initialize(api_key)
       @api_key = api_key

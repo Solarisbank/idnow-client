@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe IdnowRuby::LoginResponse do
+RSpec.describe Idnow::Response::Login do
   let(:successful_raw_response) { '{ "authToken": "nekoThtua" }' }
   let(:failure_raw_response) do
     '{
@@ -9,7 +9,7 @@ RSpec.describe IdnowRuby::LoginResponse do
                                   }]
                                 }'
   end
-  let(:login_response) { IdnowRuby::LoginResponse.new(response) }
+  let(:login_response) { Idnow::Response::Login.new(response) }
 
   describe '#auth_token' do
     subject { login_response.auth_token }
