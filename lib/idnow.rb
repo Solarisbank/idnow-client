@@ -1,15 +1,19 @@
 require 'idnow/version'
+require 'idnow/API/request_identifications'
+require 'idnow/API/retrieve_identifications'
+require 'idnow/API/logging'
 require 'idnow/client'
 require 'idnow/http_client'
-require 'idnow/responses/generic'
-require 'idnow/responses/login'
-require 'idnow/responses/start_identification'
-require 'idnow/responses/identifications'
+require 'idnow/response'
+require 'idnow/models/login'
+require 'idnow/models/identification_request'
+require 'idnow/models/identification'
 require 'idnow/post_request'
 require 'idnow/get_request'
 require 'idnow/identification_data'
 require 'idnow/login_data'
 require 'idnow/exception'
+
 
 module Idnow
   extend self

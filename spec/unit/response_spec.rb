@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe Idnow::Response::Generic do
-  let(:idnow_response) { Idnow::Response::Generic.new(response) }
+RSpec.describe Idnow::Response do
+  let(:idnow_response) { Idnow::Response.new(response) }
   let(:successful_raw_response) { '{"was":"successful"}' }
   let(:failure_raw_response) do
     '{
