@@ -1,12 +1,12 @@
 # require 'json'
 require 'net/http'
 
-module IdnowRuby
+module Idnow
   class PostRequest < Net::HTTP::Post
-    def initialize(path, identification_data)
+    def initialize(path, data)
       super(path)
       self['Content-Type'] = 'application/json'
-      self.body = identification_data.to_json
+      self.body = data.to_json
     end
   end
 end

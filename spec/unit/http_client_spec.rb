@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'pry'
 
-RSpec.describe IdnowRuby::HttpClient do
+RSpec.describe Idnow::HttpClient do
   let(:host) { 'http://www.example.com:3000' }
   let(:api_key) { 'api_key' }
-  let(:http_client) { IdnowRuby::HttpClient.new(host: host, api_key: api_key) }
+  let(:http_client) { Idnow::HttpClient.new(host: host, api_key: api_key) }
 
   describe '#new' do
     subject { http_client }

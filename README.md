@@ -1,4 +1,4 @@
-# IdnowRuby
+# Idnow
 Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 
 
@@ -7,7 +7,7 @@ Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'idnow_ruby'
+gem 'idnow'
 ```
 
 And then execute:
@@ -16,10 +16,10 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install idnow_ruby
+    $ gem install idnow
 
 ## Usage
-Configurate IdnowRuby setting `env`, `company_id` and `api_key`.
+Configurate Idnow setting `env`, `company_id` and `api_key`.
 
 `env` can be set to `:live` or `:test`. Following the IDnow API documentation, each of these environments will correspondingly set the host to:
 
@@ -30,20 +30,20 @@ Configurate IdnowRuby setting `env`, `company_id` and `api_key`.
 Example
 
 ```ruby
-IdnowRuby.env = :test
-IdnowRuby.company_id = "mycompany"
-IdnowRuby.api_key = "1234api_key"
+Idnow.env = :test
+Idnow.company_id = "mycompany"
+Idnow.api_key = "1234api_key"
 ```
 
 Then, identification requests can be performed:
-`IdnowRuby.identifier.start(transaction_number, identification_data)`
+`Idnow.identifier.start(transaction_number, identification_data)`
 
 `transaction number` is used to identify the requested identification. This ID should be used by as a key to assign the identification to an internal customer data set.
 
 `identification_data` stores the user's details. An example with all the possible attributes is: 
 
 ```
- IdnowRuby::IdentificationData.new({ 
+ Idnow::IdentificationData.new({ 
     birthday: '1984-07-20',
     birthplace: 'Buxtehude',
     birthname: 'Meier',

@@ -1,4 +1,4 @@
-module IdnowRuby
+module Idnow
   class Exception < StandardError
     def initialize(message)
       super("Request to IDnow failed: #{message}")
@@ -12,5 +12,14 @@ module IdnowRuby
   end
 
   class ResponseException < Exception
+  end
+
+  class AuthenticationException < Exception
+    def initialize
+      super('Not authenticaton token found, please log in first')
+    end
+  end
+
+  class InvalidArguments < Exception
   end
 end

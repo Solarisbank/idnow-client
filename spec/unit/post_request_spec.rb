@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'pry'
 
-RSpec.describe IdnowRuby::PostRequest do
+RSpec.describe Idnow::PostRequest do
   let(:path) { 'api/v1/company_id/identifications/1234555/start' }
   let(:identification_data) { build(:identification_data) }
-  let(:post_request) { IdnowRuby::PostRequest.new(path, identification_data) }
+  let(:post_request) { Idnow::PostRequest.new(path, identification_data) }
   describe '#new' do
     subject { post_request }
     it 'adds a application/json content type' do
