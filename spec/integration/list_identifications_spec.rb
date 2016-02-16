@@ -44,10 +44,16 @@ describe Idnow::Client do
         subject
         expect(list_identifications_request).to have_been_made
       end
+
+      it { is_expected.to be_a Array }
+
+      it 'returns an Array with Idnow::Identification objects' do
+        expect(subject[0]).to be_a Idnow::Identification
+      end
+
     end
 
     context 'when the identification returns errros' do
-      subject { client.list_identifications }
       let!(:request) do
         stub_request(:get, "#{host}/api/v1/#{company_id}/identifications")
           .with(headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })

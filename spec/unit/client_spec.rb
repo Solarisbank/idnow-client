@@ -36,7 +36,7 @@ describe Idnow::Client do
         let(:status) { 'failed' }
         let(:http_client_double) do
           response_double = double
-          allow(response_double).to receive(:body).and_return('{ "body": "Some body"}')
+          allow(response_double).to receive(:body).and_return('{ "identifications": [] } ')
           instance_double(Idnow::HttpClient, execute: response_double)
         end
 
@@ -54,7 +54,7 @@ describe Idnow::Client do
         let(:status) { nil }
         let(:http_client_double) do
           response_double = double
-          allow(response_double).to receive(:body).and_return('{ "body": "Some body"}')
+          allow(response_double).to receive(:body).and_return('{ "identifications": [] }')
           instance_double(Idnow::HttpClient, execute: response_double)
         end
 
@@ -66,6 +66,35 @@ describe Idnow::Client do
           expect(http_client_double).to receive(:execute)
           subject
         end
+      end
+    end
+  end
+
+  describe '#get_identification' do
+    subject { client.get_identification(transaction_number: 1234) }
+
+    context 'when the user did not log in' do
+      before do
+        client.instance_variable_set(:@auth_token, nil)
+      end
+      it { expect { subject }.to raise_error Idnow::AuthenticationException }
+    end
+
+    context 'when the user logged in' do
+      let(:http_client_double) do
+        response_double = double
+        allow(response_double).to receive(:body).and_return('{ "body": "Some body"}')
+        instance_double(Idnow::HttpClient, execute: response_double)
+      end
+
+      before do
+        client.instance_variable_set(:@auth_token, 'token')
+        client.instance_variable_set(:@http_client, http_client_double)
+      end
+
+      it 'executes the request' do
+        expect(http_client_double).to receive(:execute)
+        subject
       end
     end
   end
