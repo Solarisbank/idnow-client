@@ -8,7 +8,7 @@ describe Idnow::Client do
   let(:transaction_number) { '1234567890' }
 
   describe '#request_identification' do
-    subject { client.request_identification(transaction_number, identification_data) }
+    subject { client.request_identification(transaction_number: transaction_number, identification_data: identification_data) }
 
     let(:identification_data) { build(:identification_data) }
     let(:body) do
