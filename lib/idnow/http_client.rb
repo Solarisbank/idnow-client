@@ -1,10 +1,7 @@
 module Idnow
   class HttpClient
-    attr_reader :api_key
-
-    def initialize(host:, api_key:)
+    def initialize(host:)
       @uri = URI.parse(host)
-      @api_key = api_key
     end
 
     def execute(request, headers = {})

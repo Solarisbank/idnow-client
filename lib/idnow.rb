@@ -14,7 +14,6 @@ require 'idnow/identification_data'
 require 'idnow/login_data'
 require 'idnow/exception'
 
-
 module Idnow
   extend self
 

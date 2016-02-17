@@ -3,8 +3,7 @@ require 'pry'
 
 RSpec.describe Idnow::HttpClient do
   let(:host) { 'http://www.example.com:3000' }
-  let(:api_key) { 'api_key' }
-  let(:http_client) { Idnow::HttpClient.new(host: host, api_key: api_key) }
+  let(:http_client) { Idnow::HttpClient.new(host: host) }
 
   describe '#new' do
     subject { http_client }

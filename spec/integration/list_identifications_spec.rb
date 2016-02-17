@@ -50,7 +50,6 @@ describe Idnow::Client do
       it 'returns an Array with Idnow::Identification objects' do
         expect(subject[0]).to be_a Idnow::Identification
       end
-
     end
 
     context 'when the identification returns errros' do
