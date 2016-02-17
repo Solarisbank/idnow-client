@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe Idnow::HttpClient do
-  let(:http_client) { Idnow::HttpClient.new(host: host, api_key: api_key) }
+  let(:http_client) { Idnow::HttpClient.new(host: host) }
   let(:post_request) { Idnow::PostRequest.new(path, {}) }
   let(:path) { "#{host}/some/path" }
   let(:host) { Idnow::Host::TEST_SERVER }
-  let(:api_key) { 'api_key' }
 
   describe '#execute' do
     subject { http_client.execute(post_request) }

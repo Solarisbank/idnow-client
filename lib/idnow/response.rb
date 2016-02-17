@@ -1,6 +1,5 @@
 module Idnow
   class Response
-
     attr_reader :data
 
     def initialize(raw_response)

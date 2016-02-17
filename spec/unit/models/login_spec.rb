@@ -6,6 +6,6 @@ RSpec.describe Idnow::Login do
 
   describe '#auth_token' do
     subject { login.auth_token }
-    it { is_expected.to eq "nekoThtua" }
+    it { is_expected.to eq 'nekoThtua' }
   end
 end

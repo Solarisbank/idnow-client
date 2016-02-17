@@ -1,7 +1,6 @@
 module Idnow
   module API
     module RetrieveIdentifications
-
       IDENTIFICATION_STATUSES = %w(pending failed).freeze
 
       def list_identifications(status: nil)
@@ -25,7 +24,6 @@ module Idnow
         response = execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
         Idnow::Identification.new(response.data)
       end
-
     end
   end
 end
