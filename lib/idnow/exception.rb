@@ -5,21 +5,21 @@ module Idnow
     end
   end
 
-  class ConnectionException < Exception
+  class ConnectionException < Idnow::Exception
     def initialize(exception)
       super("#{exception.class}, #{exception.message}")
     end
   end
 
-  class ResponseException < Exception
+  class ResponseException < Idnow::Exception
   end
 
-  class AuthenticationException < Exception
+  class AuthenticationException < Idnow::Exception
     def initialize
       super('Not authenticaton token found, please log in first')
     end
   end
 
-  class InvalidArguments < Exception
+  class InvalidArguments < Idnow::Exception
   end
 end
