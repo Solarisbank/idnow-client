@@ -10,6 +10,7 @@ module Idnow
 
     def initialize(host:, company_id:, api_key:)
       @http_client = HttpClient.new(host: host)
+      @sftp_client = SftpClient.new(host: host, username: company_id, password: api_key)
       @company_id = company_id
       @api_key = api_key
     end

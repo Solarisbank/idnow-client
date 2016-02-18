@@ -24,6 +24,11 @@ module Idnow
         response = execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
         Idnow::Identification.new(response.data)
       end
+
+      def download_identification(transaction_number:)
+        path = "#{transaction_number}.zip"
+        @sftp_client.download(path)
+      end
     end
   end
 end
