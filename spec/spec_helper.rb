@@ -11,6 +11,7 @@ require 'rspec'
 require 'factory_girl'
 require 'webmock/rspec'
 require 'pry'
+require 'shoulda/matchers'
 
 Dir[File.join('.', 'spec', 'factories', '*.rb')].each { |file| require file }
 
@@ -18,4 +19,10 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+  end
 end

@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::Identification do
+  subject { identification }
+  it { should delegate_method(:result).to(:identification_process) }
+  it { should delegate_method(:reason).to(:identification_process) }
+  it { should delegate_method(:id).to(:identification_process) }
+  it { should delegate_method(:transaction_number).to(:identification_process) }
+  it { should delegate_method(:successful?).to(:identification_process) }
+
+  let(:identification) { Idnow::Identification.new(json_data) }
+
   let(:json_data) do
     Idnow::Response.new(
       '{
@@ -96,22 +105,10 @@ RSpec.describe Idnow::Identification do
     ).data
   end
 
-  let(:identification) { Idnow::Identification.new(json_data) }
-
   describe '#identification_process' do
     subject { identification.identification_process }
     it 'returns an indentification process' do
-      expect(subject).to eq({
-                              'result' => 'FAILED',
-                              'reason' => 'STALLED_TIMEOUT',
-                              'companyid' => 'ihrebank',
-                              'filename' => '12345.zip',
-                              'identificationtime' => '2016-02-10T15:02:42+01:00',
-                              'id' => 'TST-UMCJU',
-                              'href' => '/api/v1/ihrebank/identifications/12345.zip',
-                              'type' => 'WEB',
-                              'transactionnumber' => '12345'
-                            })
+      expect(subject).to be_a Idnow::IdentificationProcess
     end
   end
 

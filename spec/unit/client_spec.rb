@@ -83,7 +83,7 @@ describe Idnow::Client do
     context 'when the user logged in' do
       let(:http_client_double) do
         response_double = double
-        allow(response_double).to receive(:body).and_return('{ "body": "Some body"}')
+        allow(response_double).to receive(:body).and_return('{ "identificationprocess": "Some process"}')
         instance_double(Idnow::HttpClient, execute: response_double)
       end
 
