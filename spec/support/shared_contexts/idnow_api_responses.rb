@@ -1,6 +1,8 @@
 RSpec.shared_context 'idnow api responses' do
   let(:user_data_hash) { success_identification_hash['userdata'] }
 
+  let(:contact_data_hash) { success_identification_hash['contactdata'] }
+
   let(:identification_process_hash) { success_identification_hash['identificationprocess'] }
 
   let(:success_identification_hash) { JSON.parse(success_identification_json) }

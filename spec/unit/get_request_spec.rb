@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 RSpec.describe Idnow::GetRequest do
   let(:path) { 'api/v1/company_id/login' }

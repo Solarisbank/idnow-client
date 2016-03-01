@@ -1,7 +1,7 @@
 module Idnow
   class IdentificationProcess
     SUCCESSFUL_RESPONSES = %w(SUCCESS SUCCESS_DATA_CHANGED).freeze
-    attr_reader :result, :reason, :company_id, :filename, :agentname, :identification_time, :id, :href, :type, :transaction_number
+    attr_accessor :result, :reason, :company_id, :filename, :agentname, :identification_time, :id, :href, :type, :transaction_number
 
     def initialize(data)
       @result = data['result']

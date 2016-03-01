@@ -5,19 +5,29 @@ RSpec.describe Idnow::UserData do
 
   let(:user_data) { Idnow::UserData.new(user_data_hash) }
 
+  describe '#address' do
+    subject { user_data.address }
+    it { is_expected.to eq 'STREET 1, 12345 CITY, DE' }
+  end
+
   describe '#birthday' do
     subject { user_data.birthday }
     it { is_expected.to eq '2002-02-02' }
   end
 
-  describe '#firstname' do
-    subject { user_data.firstname }
-    it { is_expected.to eq 'Mr Potatoe' }
+  describe '#birthname' do
+    subject { user_data.birthname }
+    it { is_expected.to be_nil }
   end
 
-  describe '#zipcode' do
-    subject { user_data.zipcode }
-    it { is_expected.to eq '12345' }
+  describe '#birthplace' do
+    subject { user_data.birthplace }
+    it { is_expected.to eq 'BIRTHPLACE' }
+  end
+
+  describe '#city' do
+    subject { user_data.city }
+    it { is_expected.to eq 'CITY' }
   end
 
   describe '#country' do
@@ -25,9 +35,24 @@ RSpec.describe Idnow::UserData do
     it { is_expected.to eq 'DE' }
   end
 
-  describe '#city' do
-    subject { user_data.city }
-    it { is_expected.to eq 'CITY' }
+  describe '#firstname' do
+    subject { user_data.firstname }
+    it { is_expected.to eq 'Mr Potatoe' }
+  end
+
+  describe '#gender' do
+    subject { user_data.gender }
+    it { is_expected.to be_nil }
+  end
+
+  describe '#last_name' do
+    subject { user_data.lastname }
+    it { is_expected.to eq 'LASTNAME' }
+  end
+
+  describe '#nationality' do
+    subject { user_data.nationality }
+    it { is_expected.to eq 'DE' }
   end
 
   describe '#street' do
@@ -40,23 +65,13 @@ RSpec.describe Idnow::UserData do
     it { is_expected.to eq '1' }
   end
 
-  describe '#birthplace' do
-    subject { user_data.birthplace }
-    it { is_expected.to eq 'BIRTHPLACE' }
+  describe '#zipcode' do
+    subject { user_data.zipcode }
+    it { is_expected.to eq '12345' }
   end
 
-  describe '#nationality' do
-    subject { user_data.nationality }
-    it { is_expected.to eq 'DE' }
-  end
-
-  describe '#last_name' do
-    subject { user_data.lastname }
-    it { is_expected.to eq 'LASTNAME' }
-  end
-
-  describe '#address' do
-    subject { user_data.address }
-    it { is_expected.to eq 'STREET 1, 12345 CITY, DE' }
+  describe '#title' do
+    subject { user_data.title }
+    it { is_expected.to be_nil }
   end
 end

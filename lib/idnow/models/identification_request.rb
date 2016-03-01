@@ -1,6 +1,6 @@
 module Idnow
   class IdentificationRequest
-    attr_reader :id, :transaction_number
+    attr_accessor :id, :transaction_number
 
     def initialize(data, transaction_number)
       @id = data['id']

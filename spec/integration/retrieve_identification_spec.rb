@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Idnow::Client do
+  include_context 'idnow api responses'
+
   let(:client) { Idnow::Client.new(host: host, company_id: company_id, api_key: api_key) }
   let(:host) { Idnow::Host::TEST_SERVER }
   let(:company_id) { 'solaris' }
@@ -24,75 +26,7 @@ describe Idnow::Client do
       let!(:get_identification_request) do
         stub_request(:get, "#{host}/api/v1/#{company_id}/identifications/#{transaction_number}")
           .with(headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Login-Token' => 'nekoThtua' })
-          .to_return(status: 200, body: '{
-                                            "identificationprocess": {
-                                                "result": "SUCCESS",
-                                                "agentname": "HMUELLER",
-                                                "identificationtime": "2014-06-02T05:03:54Z",
-                                                "type": "WEB",
-                                                "transactionnumber": "AH73JK3LM",
-                                                "companyid":"ihrebank",
-                                                "id": "IBA-H7GB6",
-                                                "filename":"AH73JK3LM.zip",
-                                                "href": "/api/v1/ihrebank/identifications/AH73JK3LM.zip"
-                                              },
-                                              "userdata": {
-                                                "birthday": {
-                                                  "value": "1984-07-20",
-                                                  "status": "MATCH"
-                                                },
-                                                "firstname": {
-                                                  "value": "PETRA",
-                                                  "status": "MATCH"
-                                                },
-                                                "address": {
-                                                  "zipcode": {
-                                                    "value": "10439",
-                                                    "status": "MATCH"
-                                                  },
-                                                  "country": {
-                                                    "value": "DE",
-                                                    "status": "MATCH"
-                                                  },
-                                                  "city": {
-                                                    "value": "BERLIN",
-                                                    "status": "MATCH"
-                                                  },
-                                                  "street": {
-                                                    "value": "SESAMSTRAxC3x9FE",
-                                                    "status": "MATCH"
-                                                  },
-                                                  "streetnumber": {
-                                                    "value": "34C",
-                                                    "status": "MATCH"
-                                                  }
-                                                },
-                                                "birthplace": {
-                                                  "value": "BUXTEHUDE",
-                                                  "status": "MATCH"
-                                                },
-                                                "nationality": {
-                                                  "value": "DE",
-                                                  "status": "MATCH"
-                                                },
-                                                "gender": {
-                                                  "value": "FEMALE",
-                                                  "status": "MATCH"
-                                                },
-                                                "birthname": {
-                                                  "value": "MEIER",
-                                                  "status": "MATCH"
-                                                },
-                                                "title": {
-                                                  "value": "PROF.DR.DR.HC",
-                                                  "status": "MATCH"
-                                                },
-                                                "lastname": {
-                                                  "value": "MEIER",
-                                                  "status": "MATCH"
-                                                }
-                                              }
-                                          }')
+          .to_return(status: 200, body: success_identification_json)
       end
 
       it 'makes a request to the server' do

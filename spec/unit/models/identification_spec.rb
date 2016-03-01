@@ -22,10 +22,7 @@ RSpec.describe Idnow::Identification do
   describe '#contact_data' do
     subject { identification.contact_data }
     it 'returns an indentification process' do
-      expect(subject).to eq({
-                              'mobilephone' => '+4915193875727462264',
-                              'email' => 'petra.meier@example.com'
-                            })
+      expect(subject).to be_a Idnow::ContactData
     end
   end
 
