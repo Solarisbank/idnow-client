@@ -35,6 +35,62 @@ describe Idnow::Client do
                                                 "id": "IBA-H7GB6",
                                                 "filename":"AH73JK3LM.zip",
                                                 "href": "/api/v1/ihrebank/identifications/AH73JK3LM.zip"
+                                              },
+                                              "userdata": {
+                                                "birthday": {
+                                                  "value": "1984-07-20",
+                                                  "status": "MATCH"
+                                                },
+                                                "firstname": {
+                                                  "value": "PETRA",
+                                                  "status": "MATCH"
+                                                },
+                                                "address": {
+                                                  "zipcode": {
+                                                    "value": "10439",
+                                                    "status": "MATCH"
+                                                  },
+                                                  "country": {
+                                                    "value": "DE",
+                                                    "status": "MATCH"
+                                                  },
+                                                  "city": {
+                                                    "value": "BERLIN",
+                                                    "status": "MATCH"
+                                                  },
+                                                  "street": {
+                                                    "value": "SESAMSTRAxC3x9FE",
+                                                    "status": "MATCH"
+                                                  },
+                                                  "streetnumber": {
+                                                    "value": "34C",
+                                                    "status": "MATCH"
+                                                  }
+                                                },
+                                                "birthplace": {
+                                                  "value": "BUXTEHUDE",
+                                                  "status": "MATCH"
+                                                },
+                                                "nationality": {
+                                                  "value": "DE",
+                                                  "status": "MATCH"
+                                                },
+                                                "gender": {
+                                                  "value": "FEMALE",
+                                                  "status": "MATCH"
+                                                },
+                                                "birthname": {
+                                                  "value": "MEIER",
+                                                  "status": "MATCH"
+                                                },
+                                                "title": {
+                                                  "value": "PROF.DR.DR.HC",
+                                                  "status": "MATCH"
+                                                },
+                                                "lastname": {
+                                                  "value": "MEIER",
+                                                  "status": "MATCH"
+                                                }
                                               }
                                           }')
       end

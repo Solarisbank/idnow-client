@@ -9,7 +9,7 @@ module Idnow
     def initialize(data)
       @identification_process = IdentificationProcess.new(data['identificationprocess'])
       @contact_data = data['contactdata']
-      @user_data = data['userdata']
+      @user_data = UserData.new(data['userdata'])
       @identification_document = data['identification_document']
       @attachments = data['attachments']
     end

@@ -12,4 +12,5 @@ Idnow.company_id = company_id
 Idnow.api_key = api_key
 
 Idnow.client.login
+puts 'Downloading ...'
 Idnow.client.download_identification(transaction_number: transaction_number)
