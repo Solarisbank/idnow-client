@@ -1,6 +1,8 @@
 require 'forwardable'
 module Idnow
   class Identification
+    include Idnow::Jsonable
+
     extend Forwardable
 
     attr_accessor :identification_process, :contact_data, :user_data,

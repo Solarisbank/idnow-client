@@ -1,4 +1,5 @@
 require 'idnow/version'
+require 'idnow/modules/jsonable'
 require 'idnow/API/request_identifications'
 require 'idnow/API/retrieve_identifications'
 require 'idnow/API/logging'

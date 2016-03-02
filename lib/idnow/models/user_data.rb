@@ -1,23 +1,24 @@
 module Idnow
   class UserData
+    include Idnow::Jsonable
+
     attr_accessor :birthday, :birthname, :birthplace, :city, :country, :firstname, :gender, :lastname, :nationality, :street, :streetnumber,
                   :title, :zipcode
 
     def initialize(data)
-      @data = data
-      @birthday = dig_value('birthday')
-      @birthname = dig_value('birthname')
-      @birthplace = dig_value('birthplace')
-      @city = dig_value('address', 'city')
-      @country = dig_value('address', 'country')
-      @firstname = dig_value('firstname')
-      @gender = dig_value('gender')
-      @lastname = dig_value('lastname')
-      @nationality = dig_value('nationality')
-      @street = dig_value('address', 'street')
-      @streetnumber = dig_value('address', 'streetnumber')
-      @title = dig_value('title')
-      @zipcode = dig_value('address', 'zipcode')
+      @birthday = dig_value('birthday', data)
+      @birthname = dig_value('birthname', data)
+      @birthplace = dig_value('birthplace', data)
+      @city = dig_value('address', 'city', data)
+      @country = dig_value('address', 'country', data)
+      @firstname = dig_value('firstname', data)
+      @gender = dig_value('gender', data)
+      @lastname = dig_value('lastname', data)
+      @nationality = dig_value('nationality', data)
+      @street = dig_value('address', 'street', data)
+      @streetnumber = dig_value('address', 'streetnumber', data)
+      @title = dig_value('title', data)
+      @zipcode = dig_value('address', 'zipcode', data)
     end
 
     def address
@@ -26,9 +27,9 @@ module Idnow
 
     private
 
-    def dig_value(*keys)
+    def dig_value(*keys, data)
       # TODO: use ruby 2.3 and dig
-      result = @data
+      result = data
       keys.each do |key|
         result = result.fetch(key, {})
       end

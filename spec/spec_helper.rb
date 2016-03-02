@@ -13,12 +13,14 @@ require 'webmock/rspec'
 require 'pry'
 require 'shoulda/matchers'
 
-Dir[File.join('.', 'spec', 'support', 'shared_contexts', '*.rb')].each { |file| require file }
-Dir[File.join('.', 'spec', 'support', 'factories', '*.rb')].each { |file| require file }
+Dir[File.join('.', 'spec', 'support', '**', '*.rb')].each { |file| require file }
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
+
+FactoryGirl.register_strategy(:json, JsonStrategy)
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include IdnowResponsesHelper
 end
 
 Shoulda::Matchers.configure do |config|

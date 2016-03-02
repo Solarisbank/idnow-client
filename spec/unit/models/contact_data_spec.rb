@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::ContactData do
-  include_context 'idnow api responses'
-
-  let(:contact_data) { Idnow::ContactData.new(contact_data_hash) }
+  let(:contact_data) { build(:idnow_contact_data) }
 
   describe '#email' do
     subject { contact_data.email }

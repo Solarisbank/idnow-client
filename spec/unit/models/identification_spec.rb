@@ -1,16 +1,15 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::Identification do
-  include_context 'idnow api responses'
-
   subject { identification }
+
   it { should delegate_method(:result).to(:identification_process) }
   it { should delegate_method(:reason).to(:identification_process) }
   it { should delegate_method(:id).to(:identification_process) }
   it { should delegate_method(:transaction_number).to(:identification_process) }
   it { should delegate_method(:successful?).to(:identification_process) }
 
-  let(:identification) { Idnow::Identification.new(success_identification_hash) }
+  let(:identification) { build(:idnow_identification) }
 
   describe '#identification_process' do
     subject { identification.identification_process }

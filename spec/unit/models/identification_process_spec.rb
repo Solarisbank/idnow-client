@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::IdentificationProcess do
-  include_context 'idnow api responses'
-
-  let(:identification_process) { Idnow::IdentificationProcess.new(identification_process_hash) }
+  let(:identification_process) { build(:idnow_identification_process, result: result) }
 
   let(:result) { 'SUCCESS' }
 
@@ -60,20 +58,17 @@ RSpec.describe Idnow::IdentificationProcess do
   describe '#successful?' do
     subject { identification_process.successful? }
     context 'when result was SUCCESS' do
-      before { identification_process.instance_variable_set('@result', 'SUCCESS') }
+      let(:result) { 'SUCCESS' }
       it { is_expected.to be_truthy }
     end
 
     context 'whe result was SUCCESS_DATA_CHANGED' do
-      before { identification_process.instance_variable_set('@result', 'SUCCESS_DATA_CHANGED') }
-      it { be_truthy }
+      let(:result) { 'SUCCESS_DATA_CHANGED' }
+      it { is_expected.to be_truthy }
     end
 
     context 'when result is not SUCCESS or SUCCES_DATA_CHANGED' do
-      before do
-        identification_process.instance_variable_set('@result', "FRAUD_SUSPICION_CON
-      FIRMED")
-      end
+      let(:result) { 'FRAUD_SUSPICION_CONFIRMED' }
       it { is_expected.to be_falsey }
     end
   end
