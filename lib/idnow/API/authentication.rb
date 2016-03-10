@@ -1,6 +1,6 @@
 module Idnow
   module API
-    module Logging
+    module Authentication
       def login
         path = full_path_for('login')
         login_data = Idnow::LoginData.new(@api_key)

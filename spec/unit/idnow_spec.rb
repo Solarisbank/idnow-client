@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Idnow do
-  it 'has a version number' do
-    expect(Idnow::VERSION).not_to be nil
-  end
-
   describe '.env=' do
     before do
       Idnow.instance_variable_set(:@host, 'http://any-host.com')

@@ -1,12 +1,16 @@
+require 'idnow/API/authentication'
+require 'idnow/API/automated_testing' # shouldn't be included by default
+require 'idnow/API/request_identifications'
+require 'idnow/API/retrieve_identifications'
+
 module Idnow
   class Client
+    include Idnow::API::Authentication
     include Idnow::API::RetrieveIdentifications
     include Idnow::API::RequestIdentifications
-    include Idnow::API::Logging
     include Idnow::API::AutomatedTesting
 
     API_VERSION = 'v1'.freeze
-    AUTOMATED_TESTING_HOST = 'https://api.test.idnow.de'.freeze
 
     def initialize(host:, company_id:, api_key:)
       @http_client = HttpClient.new(host: host)
@@ -29,7 +33,7 @@ module Idnow
     end
 
     def automated_testing_http_client
-      @automated_testing_http_client ||= HttpClient.new(host: AUTOMATED_TESTING_HOST)
+      @automated_testing_http_client ||= HttpClient.new(host: Idnow::API::AutomatedTesting::HOST)
     end
   end
 end

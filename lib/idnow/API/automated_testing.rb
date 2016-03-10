@@ -1,6 +1,8 @@
 module Idnow
   module API
     module AutomatedTesting
+      HOST = 'https://api.test.idnow.de'.freeze
+
       def testing_start(transaction_number:)
         path = full_path_for("identifications/#{transaction_number}/start")
         request = Idnow::PostRequest.new(path, {})
