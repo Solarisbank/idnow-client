@@ -1,10 +1,6 @@
-require 'idnow/version'
 require 'idnow/modules/jsonable'
-require 'idnow/API/request_identifications'
-require 'idnow/API/retrieve_identifications'
-require 'idnow/API/logging'
-require 'idnow/API/automated_testing'
 require 'idnow/client'
+
 require 'idnow/http_client'
 require 'idnow/sftp_client'
 require 'idnow/response'

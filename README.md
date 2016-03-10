@@ -1,4 +1,4 @@
-# Idnow
+# Idnow Client
 Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 
 
@@ -19,15 +19,21 @@ Or install it yourself as:
     $ gem install idnow
 
 ## Usage
-Configurate Idnow setting `env`, `company_id` and `api_key`.
 
-`env` can be set to `:live` or `:test`. Following the IDnow API documentation, each of these environments will correspondingly set the host to:
+### Configuration
 
-- Live server `gateway.idnow.de`- Test server `gateway.test.idnow.de`
+The Idnow client takes three setting: `env`, `company_id` and `api_key`.
 
-`company_id` uniquely identifies your company as provided by IDnow during your account setup
+1.  `env` can be set to `:live` or `:test`. Following the IDnow API documentation,
+each of these environments will correspondingly set the host to:
 
-Example
+  -  Live server `gateway.idnow.de`
+  -  Test server `gateway.test.idnow.de`
+
+2.  `company_id` and `api_key` uniquely identifies your company as provided by
+IDnow during your account setup.
+
+Example:
 
 ```ruby
 Idnow.env = :test
@@ -35,15 +41,22 @@ Idnow.company_id = "mycompany"
 Idnow.api_key = "1234api_key"
 ```
 
+### API
+
 Then, identification requests can be performed:
-`Idnow.identifier.start(transaction_number, identification_data)`
 
-`transaction number` is used to identify the requested identification. This ID should be used by as a key to assign the identification to an internal customer data set.
-
-`identification_data` stores the user's details. An example with all the possible attributes is: 
-
+```ruby
+Idnow.identifier.start(transaction_number, identification_data)
 ```
- Idnow::IdentificationData.new({ 
+
+`transaction number` is used to identify the requested identification. This ID
+should be used by as a key to assign the identification to an internal customer data set.
+
+`identification_data` stores the user's details. An example with all the
+possible attributes is:
+
+```ruby
+ Idnow::IdentificationData.new({
     birthday: '1984-07-20',
     birthplace: 'Buxtehude',
     birthname: 'Meier',
@@ -73,5 +86,3 @@ Rspec is used for testing.
 To enable code coverage check, set COV environment variable:
 
 `COV=true bundle exec rspec`
-
-

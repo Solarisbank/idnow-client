@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - bundle exec rspec
+    - make test

@@ -12,7 +12,7 @@ describe Idnow::Client do
 
     context 'when starting the automated testing is successful' do
       let!(:request) do
-        stub_request(:post, Idnow::Client::AUTOMATED_TESTING_HOST +
+        stub_request(:post, Idnow::API::AutomatedTesting::HOST +
         "/api/v1/#{company_id}/identifications/#{transaction_number}/requestVideoChat")
           .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Key' => api_key })
           .to_return(status: 200, body: '{}')
@@ -26,7 +26,7 @@ describe Idnow::Client do
 
     context 'when starting the mautomated testing returns errros' do
       let!(:request) do
-        stub_request(:post, Idnow::Client::AUTOMATED_TESTING_HOST +
+        stub_request(:post, Idnow::API::AutomatedTesting::HOST +
                             "/api/v1/#{company_id}/identifications/#{transaction_number}/requestVideoChat")
           .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Key' => api_key })
           .to_return(status: 401, body: '{

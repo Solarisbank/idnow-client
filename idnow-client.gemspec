@@ -1,11 +1,8 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'idnow/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = Idnow::VERSION
+  spec.version       = '0.1.0'
   spec.authors       = ['Dominic Breuker, Joan Martinez']
   spec.email         = ['joan.martinez@hitfoxgroup']
 
