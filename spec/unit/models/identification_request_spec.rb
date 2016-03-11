@@ -9,7 +9,7 @@ RSpec.describe Idnow::IdentificationRequest do
   describe '#id' do
     subject { identification_request.id }
     it 'returns the id' do
-      expect(subject).to eq 'IBA-H5FD8'
+      is_expected.to eq 'IBA-H5FD8'
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe Idnow::IdentificationRequest do
         Idnow.env = :test
       end
       it 'returns a test redirect url' do
-        expect(subject).to eq "https://go.test.idnow.de/#{Idnow.company_id}/identifications/#{transaction_number}/identification/start"
+        is_expected.to eq "https://go.test.idnow.de/#{Idnow.company_id}/identifications/#{transaction_number}/identification/start"
       end
     end
     context 'when env is :live' do
@@ -28,7 +28,7 @@ RSpec.describe Idnow::IdentificationRequest do
         Idnow.env = :live
       end
       it 'returns a live redirect url' do
-        expect(subject).to eq "https://go.idnow.de/#{Idnow.company_id}/identifications/#{transaction_number}/identification/start"
+        is_expected.to eq "https://go.idnow.de/#{Idnow.company_id}/identifications/#{transaction_number}/identification/start"
       end
     end
   end

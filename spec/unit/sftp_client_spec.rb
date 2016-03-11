@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Idnow::SftpClient do
+RSpec.describe Idnow::SftpClient do
   let(:sftp_client) { Idnow::SftpClient.new(host: host, username: username, password: password) }
   let(:host) { Idnow::Host::TEST_SERVER }
   let(:username) { 'username' }
@@ -40,7 +40,7 @@ describe Idnow::SftpClient do
           allow(file_double).to receive(:write).with(returned_data).and_return('FILE')
         end
         it 'creates a file with the contents downloaded from idnow' do
-          expect(subject).to eq('FILE')
+          is_expected.to eq('FILE')
         end
       end
     end

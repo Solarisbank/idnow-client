@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Idnow::IdentificationData do
+RSpec.describe Idnow::IdentificationData do
   let(:object) { Idnow::IdentificationData.new(params) }
   let(:params) { Hash.new }
 

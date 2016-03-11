@@ -25,14 +25,14 @@ RSpec.describe Idnow::Response do
     context 'given raw response without errors' do
       let(:response) { successful_raw_response }
       it 'returns nil' do
-        expect(subject).to eq nil
+        is_expected.to eq nil
       end
     end
 
     context 'given a raw response with errors ' do
       let(:response) { failure_raw_response }
       it 'returns the errors' do
-        expect(subject).to eq(
+        is_expected.to eq(
           [
             { 'cause' => 'SOMETHING_WRONG' }
           ]

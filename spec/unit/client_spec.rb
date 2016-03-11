@@ -1,9 +1,6 @@
-
 require 'spec_helper'
 
-describe Idnow::Client do
-  include_context 'idnow api responses'
-
+RSpec.describe Idnow::Client do
   let(:client) { Idnow::Client.new(host: host, company_id: company_id, api_key: api_key) }
   let(:host) { Idnow::Host::TEST_SERVER }
   let(:company_id) { 'solaris' }
@@ -84,10 +81,11 @@ describe Idnow::Client do
 
     context 'when the user logged in' do
       let(:http_client_double) do
-        response_double = double
-        allow(response_double).to receive(:body).and_return(success_identification_json)
+        response_double = double(:response, body: success_identification_json)
         instance_double(Idnow::HttpClient, execute: response_double)
       end
+
+      let(:success_identification_json) { build(:idnow_identification_hash).to_json }
 
       before do
         client.instance_variable_set(:@auth_token, 'token')

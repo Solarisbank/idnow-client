@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::UserData do
-  let(:user_data) { build(:idnow_user_data) }
+  let(:user_data) { build(:idnow_identification).user_data }
 
   describe '#address' do
     subject { user_data.address }
@@ -15,7 +15,7 @@ RSpec.describe Idnow::UserData do
 
   describe '#birthname' do
     subject { user_data.birthname }
-    it { is_expected.to eq 'BIRTHNAME' }
+    it { is_expected.to be_nil }
   end
 
   describe '#birthplace' do
@@ -70,6 +70,6 @@ RSpec.describe Idnow::UserData do
 
   describe '#title' do
     subject { user_data.title }
-    it { is_expected.to eq 'TITLE' }
+    it { is_expected.to be_nil }
   end
 end
