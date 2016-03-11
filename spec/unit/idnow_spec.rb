@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Idnow do
+RSpec.describe Idnow do
   describe '.env=' do
     before do
       Idnow.instance_variable_set(:@host, 'http://any-host.com')

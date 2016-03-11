@@ -1,61 +1,53 @@
 require 'spec_helper'
 
-describe Idnow::Client do
-  include_context 'idnow api responses'
+RSpec.describe 'list identifications', :stub_connect do
+  subject { client.list_identifications }
 
-  let(:client) { Idnow::Client.new(host: host, company_id: company_id, api_key: api_key) }
-  let(:host) { Idnow::Host::TEST_SERVER }
-  let(:company_id) { 'solaris' }
-  let(:api_key) { 'api_key' }
+  let!(:request) do
+    stub_request(:get, idnow_url("/identifications"))
+      .with(headers: { 'Content-Type' => 'application/json', 'X-Api-Login-Token' => 'nekoThtua' })
+      .to_return(status: status, body: response_body)
+  end
+  let(:success_identification_json) { build(:idnow_identification_hash).to_json }
 
-  describe '#list_identifications' do
-    subject { client.list_identifications }
+  before do
+    login
+  end
 
-    let!(:login_request) do
-      stub_request(:post, "#{host}/api/v1/#{company_id}/login")
-        .with(body: '{"apiKey":"api_key"}')
-        .to_return(status: 200, body: '{ "authToken": "nekoThtua"}', headers: {})
+  context 'when the listing is successfull' do
+    let(:status) { 200 }
+    let(:response_body) { <<-JSON
+      {
+        "identifications": [
+          #{success_identification_json}
+        ]
+      }
+      JSON
+    }
+
+    it 'makes a request to the server' do
+      subject
+      expect(request).to have_been_made
     end
 
-    before do
-      client.login
+    it { is_expected.to be_a Array }
+
+    it 'returns an Array with Idnow::Identification objects' do
+      expect(subject[0]).to be_a Idnow::Identification
     end
+  end
 
-    context 'when the listing is successfull' do
-      let!(:list_identifications_request) do
-        stub_request(:get, "#{host}/api/v1/#{company_id}/identifications")
-          .with(headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby', 'X-Api-Login-Token' => 'nekoThtua' })
-          .to_return(status: 200, body: "{
-                                              \"identifications\": [
-                                              #{success_identification_json}
-                                              ]
-                                            }")
-      end
+  context 'when the identification returns errros' do
+    let(:status) { 401 }
+    let(:response_body) { <<-JSON
+      {
+        "errors": [{
+          "cause": "TOKEN_EXPIRED"
+        }]
+      }
+      JSON
+    }
 
-      it 'makes a request to the server' do
-        subject
-        expect(list_identifications_request).to have_been_made
-      end
-
-      it { is_expected.to be_a Array }
-
-      it 'returns an Array with Idnow::Identification objects' do
-        expect(subject[0]).to be_a Idnow::Identification
-      end
-    end
-
-    context 'when the identification returns errros' do
-      let!(:request) do
-        stub_request(:get, "#{host}/api/v1/#{company_id}/identifications")
-          .with(headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
-          .to_return(status: 401, body: '{ "errors": [{
-                                                "cause": "TOKEN_EXPIRED"
-                                           }]
-                                         }'
-                    )
-      end
-
-      it { expect { subject }.to raise_error(Idnow::ResponseException) }
-    end
+    it { expect { subject }.to raise_error(Idnow::ResponseException) }
   end
 end

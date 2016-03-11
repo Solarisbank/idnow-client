@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::IdentificationProcess do
-  let(:identification_process) { build(:idnow_identification_process, result: result) }
-
-  let(:result) { 'SUCCESS' }
+  let(:identification_process) { build(:idnow_identification).identification_process }
 
   describe '#result' do
     subject { identification_process.result }
-    it { is_expected.to eq result }
+
+    it { is_expected.to eq 'SUCCESS' }
   end
 
   describe '#reason' do
@@ -57,18 +56,24 @@ RSpec.describe Idnow::IdentificationProcess do
 
   describe '#successful?' do
     subject { identification_process.successful? }
+
+    let(:identification_process) { build(:idnow_identification, result: result).identification_process }
+
     context 'when result was SUCCESS' do
       let(:result) { 'SUCCESS' }
+
       it { is_expected.to be_truthy }
     end
 
     context 'whe result was SUCCESS_DATA_CHANGED' do
       let(:result) { 'SUCCESS_DATA_CHANGED' }
+
       it { is_expected.to be_truthy }
     end
 
     context 'when result is not SUCCESS or SUCCES_DATA_CHANGED' do
       let(:result) { 'FRAUD_SUSPICION_CONFIRMED' }
+
       it { is_expected.to be_falsey }
     end
   end

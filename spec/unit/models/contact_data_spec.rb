@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::ContactData do
-  let(:contact_data) { build(:idnow_contact_data) }
+  let(:contact_data) { build(:idnow_identification).contact_data }
 
   describe '#email' do
     subject { contact_data.email }
