@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :identification_data, class: 'Idnow::IdentificationData' do
+  factory :idnow_identification_data, class: 'Idnow::IdentificationData' do
     birthday '1984-07-20'
     birthplace 'Buxtehude'
     birthname 'Meier'
