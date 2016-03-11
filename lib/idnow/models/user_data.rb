@@ -6,19 +6,19 @@ module Idnow
                   :title, :zipcode
 
     def initialize(data)
-      @birthday = dig_value('birthday', data)
-      @birthname = dig_value('birthname', data)
-      @birthplace = dig_value('birthplace', data)
-      @city = dig_value('address', 'city', data)
-      @country = dig_value('address', 'country', data)
-      @firstname = dig_value('firstname', data)
-      @gender = dig_value('gender', data)
-      @lastname = dig_value('lastname', data)
-      @nationality = dig_value('nationality', data)
-      @street = dig_value('address', 'street', data)
+      @birthday     = dig_value('birthday', data)
+      @birthname    = dig_value('birthname', data)
+      @birthplace   = dig_value('birthplace', data)
+      @city         = dig_value('address', 'city', data)
+      @country      = dig_value('address', 'country', data)
+      @firstname    = dig_value('firstname', data)
+      @gender       = dig_value('gender', data)
+      @lastname     = dig_value('lastname', data)
+      @nationality  = dig_value('nationality', data)
+      @street       = dig_value('address', 'street', data)
       @streetnumber = dig_value('address', 'streetnumber', data)
-      @title = dig_value('title', data)
-      @zipcode = dig_value('address', 'zipcode', data)
+      @title        = dig_value('title', data)
+      @zipcode      = dig_value('address', 'zipcode', data)
     end
 
     def address
