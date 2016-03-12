@@ -8,10 +8,10 @@ FactoryGirl.define do
 
     transient do
       result "SUCCESS"
-      reference "28"
+      transaction_number "28"
 
       idnow_identification_hash {
-        build(:idnow_identification_hash, result: result, reference: reference)
+        build(:idnow_identification_hash, result: result, transaction_number: transaction_number)
       }
     end
   end
@@ -22,7 +22,7 @@ FactoryGirl.define do
     skip_create
 
     result "SUCCESS"
-    reference "28"
+    transaction_number "28"
 
     initialize_with do
       JSON.parse(<<-JSON)
@@ -30,13 +30,13 @@ FactoryGirl.define do
           "identificationprocess": {
             "result": "#{result}",
             "companyid": "ihrebank",
-            "filename": "#{reference}.zip",
+            "filename": "#{transaction_number}.zip",
             "agentname": "TROBOT",
             "identificationtime": "2016-02-25T13:51:20+01:00",
             "id": "TST-XLFYB",
-            "href": "/api/v1/ihrebank/identifications/#{reference}.zip",
+            "href": "/api/v1/ihrebank/identifications/#{transaction_number}.zip",
             "type": "WEB",
-            "transactionnumber": "#{reference}"
+            "transactionnumber": "#{transaction_number}"
           },
           "customdata": {
             "custom3": null,
@@ -120,12 +120,12 @@ FactoryGirl.define do
             }
           },
           "attachments": {
-            "pdf": "#{reference}.pdf",
-            "audiolog": "#{reference}.mp3",
-            "xml": "#{reference}.xml",
-            "idbackside": "#{reference}_idbackside.jpg",
-            "idfrontside": "#{reference}_idfrontside.jpg",
-            "userface": "#{reference}_userface.jpg"
+            "pdf": "#{transaction_number}.pdf",
+            "audiolog": "#{transaction_number}.mp3",
+            "xml": "#{transaction_number}.xml",
+            "idbackside": "#{transaction_number}_idbackside.jpg",
+            "idfrontside": "#{transaction_number}_idfrontside.jpg",
+            "userface": "#{transaction_number}_userface.jpg"
           }
         }
       JSON

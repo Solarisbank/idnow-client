@@ -5,6 +5,7 @@ module Idnow
 
       def list_identifications(status: nil)
         raise Idnow::AuthenticationException if @auth_token.nil?
+
         unless status.nil? || IDENTIFICATION_STATUSES.include?(status)
           raise Idnow::InvalidArguments, "Status #{status} not defined, possible options are: #{IDENTIFICATION_STATUSES.join(',')}"
         end
@@ -19,6 +20,7 @@ module Idnow
 
       def get_identification(transaction_number:)
         raise Idnow::AuthenticationException if @auth_token.nil?
+
         path = full_path_for("identifications/#{transaction_number}")
         request = Idnow::GetRequest.new(path)
         response = execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
