@@ -3,18 +3,20 @@ require 'idnow/client'
 
 require 'idnow/http_client'
 require 'idnow/sftp_client'
+require 'idnow/post_request'
+require 'idnow/get_request'
 require 'idnow/response'
+require 'idnow/exception'
+
 require 'idnow/models/login'
 require 'idnow/models/identification_request'
 require 'idnow/models/identification'
 require 'idnow/models/identification_process'
+
 require 'idnow/models/user_data'
 require 'idnow/models/contact_data'
-require 'idnow/post_request'
-require 'idnow/get_request'
-require 'idnow/identification_data'
-require 'idnow/login_data'
-require 'idnow/exception'
+require 'idnow/models/identification_data'
+require 'idnow/models/login_data'
 
 module Idnow
   extend self
