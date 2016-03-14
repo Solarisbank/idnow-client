@@ -21,8 +21,8 @@ RSpec.describe Idnow::HttpClient do
     context 'whent the request is successfull' do
       let!(:request) do
         stub_request(:post, path)
-        .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
-        .to_return(status: 200, body: '{ "authToken": "nekoThtua"}', headers: {})
+          .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
+          .to_return(status: 200, body: '{ "authToken": "nekoThtua"}', headers: {})
       end
 
       it 'makes a request to the server' do

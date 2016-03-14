@@ -11,8 +11,8 @@ RSpec.describe 'get identification', :stub_connect do
 
   let!(:request) do
     stub_request(:get, idnow_url("/identifications/#{transaction_number}"))
-    .with(headers: { 'Content-Type' => 'application/json', 'X-Api-Login-Token' => 'nekoThtua' })
-    .to_return(status: status, body: response_body)
+      .with(headers: { 'Content-Type' => 'application/json', 'X-Api-Login-Token' => 'nekoThtua' })
+      .to_return(status: status, body: response_body)
   end
 
   context 'when the identification is successfully retrieved' do
@@ -27,7 +27,8 @@ RSpec.describe 'get identification', :stub_connect do
 
   context 'when the identification returns errros' do
     let(:status) { 401 }
-    let(:response_body) { <<-JSON
+    let(:response_body) do
+      <<-JSON
       {
         "errors": [{
             "cause":"OBJECT_NOT_FOUND",
@@ -36,7 +37,7 @@ RSpec.describe 'get identification', :stub_connect do
           }]
         }
       JSON
-    }
+    end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }
   end

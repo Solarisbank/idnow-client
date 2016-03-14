@@ -17,7 +17,7 @@ Metrics/LineLength:
   Max: 140
 
 Metrics/MethodLength:
-  Max: 17
+  Max: 31
 
 Metrics/AbcSize:
   Enabled: false

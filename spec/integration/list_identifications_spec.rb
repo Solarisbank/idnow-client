@@ -4,7 +4,7 @@ RSpec.describe 'list identifications', :stub_connect do
   subject { client.list_identifications }
 
   let!(:request) do
-    stub_request(:get, idnow_url("/identifications"))
+    stub_request(:get, idnow_url('/identifications'))
       .with(headers: { 'Content-Type' => 'application/json', 'X-Api-Login-Token' => 'nekoThtua' })
       .to_return(status: status, body: response_body)
   end
@@ -16,14 +16,15 @@ RSpec.describe 'list identifications', :stub_connect do
 
   context 'when the listing is successfull' do
     let(:status) { 200 }
-    let(:response_body) { <<-JSON
+    let(:response_body) do
+      <<-JSON
       {
         "identifications": [
           #{success_identification_json}
         ]
       }
       JSON
-    }
+    end
 
     it 'makes a request to the server' do
       subject
@@ -39,14 +40,15 @@ RSpec.describe 'list identifications', :stub_connect do
 
   context 'when the identification returns errros' do
     let(:status) { 401 }
-    let(:response_body) { <<-JSON
+    let(:response_body) do
+      <<-JSON
       {
         "errors": [{
           "cause": "TOKEN_EXPIRED"
         }]
       }
       JSON
-    }
+    end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }
   end

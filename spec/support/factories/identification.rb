@@ -7,12 +7,12 @@ FactoryGirl.define do
     end
 
     transient do
-      result "SUCCESS"
-      transaction_number "28"
+      result 'SUCCESS'
+      transaction_number '28'
 
-      idnow_identification_hash {
+      idnow_identification_hash do
         build(:idnow_identification_hash, result: result, transaction_number: transaction_number)
-      }
+      end
     end
   end
 end
@@ -21,8 +21,8 @@ FactoryGirl.define do
   factory :idnow_identification_hash, class: 'Hash' do
     skip_create
 
-    result "SUCCESS"
-    transaction_number "28"
+    result 'SUCCESS'
+    transaction_number '28'
 
     initialize_with do
       JSON.parse(<<-JSON)

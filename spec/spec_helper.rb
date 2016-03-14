@@ -48,7 +48,7 @@ RSpec.configure do |config|
 
   # Make sure we don't commit focused specs
   if ENV['CI']
-    config.before(:example, :focus) { fail 'Dare you committing focused specs :)' }
+    config.before(:example, :focus) { raise 'Dare you committing focused specs :)' }
   end
 end
 

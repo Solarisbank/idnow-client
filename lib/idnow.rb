@@ -19,8 +19,6 @@ require 'idnow/models/identification_data'
 require 'idnow/models/login_data'
 
 module Idnow
-  extend self
-
   attr_reader :host, :target_host, :company_id, :api_key
 
   module Host # Used to request an identification through the idnow API
@@ -68,4 +66,7 @@ module Idnow
     raise 'Please set env to :test or :live' if host.nil?
     @client ||= Idnow::Client.new(host: host, company_id: company_id, api_key: api_key)
   end
+
+  module_function :host, :target_host, :company_id, :api_key, :env=,
+                  :company_id=, :api_key=, :test_env?, :client
 end

@@ -7,13 +7,13 @@ RSpec.describe 'testing_start', :stub_connect do
 
   let!(:request) do
     stub_request(:post, idnow_url("identifications/#{transaction_number}/start", host: Idnow::API::AutomatedTesting::HOST))
-    .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'X-Api-Key' => api_key })
-    .to_return(status: status, body: response_body)
+      .with(body: '{}', headers: { 'Content-Type' => 'application/json', 'X-Api-Key' => api_key })
+      .to_return(status: status, body: response_body)
   end
 
   context 'when starting the automated testing is successful' do
     let(:status) { 200 }
-    let(:response_body) {
+    let(:response_body) do
       <<-JSON
         {
           "token":"0",
@@ -32,7 +32,7 @@ RSpec.describe 'testing_start', :stub_connect do
           }
         }
       JSON
-    }
+    end
 
     it 'makes a request to the server' do
       subject
@@ -42,7 +42,7 @@ RSpec.describe 'testing_start', :stub_connect do
 
   context 'when starting the automated testing returns errros' do
     let(:status) { 401 }
-    let!(:response_body) {
+    let!(:response_body) do
       <<-JSON
       {
         "errors": [
@@ -55,7 +55,7 @@ RSpec.describe 'testing_start', :stub_connect do
         ]
       }
       JSON
-    }
+    end
     it { expect { subject }.to raise_error(Idnow::ResponseException) }
   end
 end

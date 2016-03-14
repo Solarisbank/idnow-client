@@ -38,7 +38,13 @@ RSpec.describe Idnow::Identification do
     subject { identification.identification_document }
 
     it 'returns an indentification process' do
-      is_expected.to eq({"country"=>{"value"=>"DE", "status"=>"NEW"}, "number"=>{"value"=>"123456789", "status"=>"NEW"}, "issuedby"=>{"value"=>"ISSUER", "status"=>"NEW"}, "dateissued"=>{"value"=>"2010-10-12", "status"=>"NEW"}, "type"=>{"value"=>"IDCARD", "status"=>"NEW"}, "validuntil"=>{"value"=>"2020-10-11", "status"=>"NEW"}})
+      is_expected.to eq({
+                          'country' => { 'value' => 'DE', 'status' => 'NEW' },
+                          'number' => { 'value' => '123456789', 'status' => 'NEW' },
+                          'issuedby' => { 'value' => 'ISSUER', 'status' => 'NEW' },
+                          'dateissued' => { 'value' => '2010-10-12', 'status' => 'NEW' },
+                          'type' => { 'value' => 'IDCARD', 'status' => 'NEW' },
+                          'validuntil' => { 'value' => '2020-10-11', 'status' => 'NEW' } })
     end
   end
 
@@ -46,13 +52,13 @@ RSpec.describe Idnow::Identification do
     subject { identification.attachments }
     it 'returns an indentification process' do
       is_expected.to eq({
-                              'pdf'         => '28.pdf',
-                              'audiolog'    => '28.mp3',
-                              'xml'         => '28.xml',
-                              'idbackside'  => '28_idbackside.jpg',
-                              'idfrontside' => '28_idfrontside.jpg',
-                              'userface'    => '28_userface.jpg'
-                            })
+                          'pdf' => '28.pdf',
+                          'audiolog'    => '28.mp3',
+                          'xml'         => '28.xml',
+                          'idbackside'  => '28_idbackside.jpg',
+                          'idfrontside' => '28_idfrontside.jpg',
+                          'userface'    => '28_userface.jpg'
+                        })
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'request identification', :stub_connect  do
+RSpec.describe 'request identification', :stub_connect do
   subject { client.request_identification(transaction_number: transaction_number, identification_data: identification_data) }
 
   let(:transaction_number) { '1234567890' }

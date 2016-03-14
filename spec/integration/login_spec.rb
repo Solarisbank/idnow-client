@@ -4,7 +4,7 @@ RSpec.describe 'login', :stub_connect do
   subject { client.login }
 
   let!(:request) do
-    stub_request(:post, idnow_url("/login"))
+    stub_request(:post, idnow_url('/login'))
       .with(body: body,
             headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Ruby' })
       .to_return(status: status, body: response_body, headers: {})
@@ -13,12 +13,13 @@ RSpec.describe 'login', :stub_connect do
 
   context 'whent the login is successfull' do
     let(:status) { 200 }
-    let(:response_body) { <<-JSON
+    let(:response_body) do
+      <<-JSON
       {
         "authToken": "nekoThtua"
       }
       JSON
-    }
+    end
 
     it 'makes a request to the server' do
       subject
@@ -28,7 +29,8 @@ RSpec.describe 'login', :stub_connect do
 
   context 'when the identification returns errros' do
     let(:status) { 400 }
-    let(:response_body) { <<-JSON
+    let(:response_body) do
+      <<-JSON
       {
         "errors": [{
           "cause": "INVALID_LOGIN_TOKEN",
@@ -38,7 +40,7 @@ RSpec.describe 'login', :stub_connect do
         }]
       }
       JSON
-    }
+    end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }
   end

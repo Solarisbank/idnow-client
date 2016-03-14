@@ -2,38 +2,18 @@ require 'json'
 
 module Idnow
   class IdentificationData
-    VALID_ATTRIBUTES = [:birthday,
-                        :birthplace,
-                        :birthname,
-                        :city,
-                        :country,
-                        :custom1,
-                        :custom2,
-                        :custom3,
-                        :custom4,
-                        :custom5,
-                        :trackingid,
-                        :email,
-                        :firstname,
-                        :gender,
-                        :lastname,
-                        :mobilephone,
-                        :nationality,
-                        :street,
-                        :streetnumber,
-                        :title,
-                        :zipcode].freeze
-
     module Gender
       MALE = 'MALE'.freeze
       FEMALE = 'FEMALE'.freeze
     end
 
-    attr_accessor *VALID_ATTRIBUTES
+    attr_accessor :birthplace, :birthname, :city, :country, :custom1,
+                  :custom2, :custom3, :custom4, :custom5, :trackingid, :email, :firstname, :gender,
+                  :lastname, :mobilephone, :nationality, :street, :streetnumber, :title, :zipcode
 
     def initialize(params = {})
       params.keys.each do |key|
-        raise ArgumentError, "Attribute #{key} is not supported!" unless VALID_ATTRIBUTES.include?(key.to_sym)
+        raise ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
 
         send("#{key}=", params[key])
       end
@@ -41,8 +21,8 @@ module Idnow
 
     def to_json
       result = {}
-      VALID_ATTRIBUTES.each do |attribute|
-        result[attribute] = send(attribute) if send(attribute)
+      instance_variables.each do |attribute|
+        result[attribute.to_s.delete('@')] = instance_variable_get(attribute)
       end
       result.to_json
     end
