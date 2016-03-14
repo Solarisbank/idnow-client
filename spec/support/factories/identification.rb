@@ -91,6 +91,18 @@ FactoryGirl.define do
             "lastname": {
               "value": "LASTNAME",
               "status": "NEW"
+            },
+            "title": {
+              "value": "TITLE",
+              "status": "MATCH"
+            },
+            "gender": {
+              "value": "GENDER",
+              "status": "MATCH"
+            },
+            "birthname": {
+              "value": "BIRTHNAME",
+              "status": "MATCH"
             }
           },
           "identificationdocument": {

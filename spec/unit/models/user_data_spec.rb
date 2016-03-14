@@ -15,7 +15,7 @@ RSpec.describe Idnow::UserData do
 
   describe '#birthname' do
     subject { user_data.birthname }
-    it { is_expected.to be_nil }
+    it { is_expected.to eq 'BIRTHNAME' }
   end
 
   describe '#birthplace' do
@@ -40,7 +40,7 @@ RSpec.describe Idnow::UserData do
 
   describe '#gender' do
     subject { user_data.gender }
-    it { is_expected.to be_nil }
+    it { is_expected.to eq 'GENDER' }
   end
 
   describe '#last_name' do
@@ -70,6 +70,6 @@ RSpec.describe Idnow::UserData do
 
   describe '#title' do
     subject { user_data.title }
-    it { is_expected.to be_nil }
+    it { is_expected.to eq 'TITLE' }
   end
 end

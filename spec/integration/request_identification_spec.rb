@@ -12,30 +12,7 @@ RSpec.describe 'request identification', :stub_connect do
       .to_return(status: 200, body: response_body, headers: {})
   end
   let(:body) do
-    JSON.parse(<<-JSON).to_json
-    {
-      "birthday":"1984-07-20",
-      "birthplace":"Buxtehude",
-      "birthname":"Meier",
-      "city":"Berlin",
-      "country":"DE",
-      "custom1":"first custom parameter",
-      "custom2":"second custom parameter",
-      "custom3":"third custom parameter",
-      "custom4":"fourth custom parameter",
-      "custom5":"fifth custom parameter",
-      "trackingid":"track123",
-      "email":"petra.meier@example.com",
-      "firstname":"Petra",
-      "gender":"FEMALE",
-      "lastname":"Meier",
-      "nationality":"DE",
-      "street":"Sesamstraße",
-      "streetnumber":"34c",
-      "title":"Prof. Dr. Dr. hc",
-      "zipcode":"10439"
-    }
-    JSON
+    json(:idnow_identification_data)
   end
 
   let(:response_body) do
@@ -45,11 +22,6 @@ RSpec.describe 'request identification', :stub_connect do
     }
     JSON
   end
-
-  # TODO: WHY is this not needed??
-  # before do
-  #   login
-  # end
 
   context 'when the request to idnow is successfull' do
     it 'makes a request to the server' do
