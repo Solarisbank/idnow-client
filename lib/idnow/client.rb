@@ -3,6 +3,7 @@ require 'idnow/API/automated_testing' # shouldn't be included by default
 require 'idnow/API/request_identifications'
 require 'idnow/API/retrieve_identifications'
 require 'idnow/API/document_definitions'
+require 'idnow/API/upload_signed_documents'
 
 module Idnow
   class Client
@@ -11,6 +12,7 @@ module Idnow
     include Idnow::API::RequestIdentifications
     include Idnow::API::AutomatedTesting
     include Idnow::API::DocumentDefinitions
+    include Idnow::API::UploadSignedDocuments
 
     API_VERSION = 'v1'.freeze
 
