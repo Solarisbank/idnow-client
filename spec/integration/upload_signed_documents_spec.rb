@@ -5,7 +5,8 @@ RSpec.describe 'upload signed documents', :stub_connect do
 
   let(:transaction_number) { '12345' }
   let(:document_definition_identifier) { 'testdoc' }
-  let(:file) { %w(some thing).pack('B*') }
+  let(:file) { File.open('spec/support/test_files/example.txt', 'r') }
+  let(:binary_file_data) { File.read(file).unpack('b*').first }
 
   before do
     login
@@ -13,7 +14,7 @@ RSpec.describe 'upload signed documents', :stub_connect do
 
   let!(:request) do
     stub_request(:post, idnow_url("/identifications/#{transaction_number}/documents/#{document_definition_identifier}/data"))
-      .with(body: file,
+      .with(body: binary_file_data,
             headers: { 'Content-Type' => 'application/octet-stream', 'X-Api-Login-Token' => 'nekoThtua' })
       .to_return(status: 200, body: response_body, headers: {})
   end
