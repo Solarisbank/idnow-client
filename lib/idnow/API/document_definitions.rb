@@ -5,7 +5,7 @@ module Idnow
         fail Idnow::AuthenticationException if @auth_token.nil?
 
         path = full_path_for('documentdefinitions')
-        request = Idnow::PostRequest.new(path, document_data)
+        request = Idnow::PostJsonRequest.new(path, document_data)
         execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
       end
     end

@@ -99,8 +99,8 @@ RSpec.describe Idnow::Client do
     end
   end
 
-  describe '#upload_document' do
-    subject { client.upload_document(transaction_number, document_definition_identifier, file) }
+  describe '#upload_identification_document' do
+    subject { client.upload_identification_document(transaction_number, document_definition_identifier, file) }
     let(:transaction_number) { '12345' }
     let(:document_definition_identifier) { 'cool_doc' }
     let(:file) { File.open('spec/support/test_files/example.txt', 'r') }

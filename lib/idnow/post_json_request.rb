@@ -2,7 +2,7 @@
 require 'net/http'
 
 module Idnow
-  class PostRequest < Net::HTTP::Post
+  class PostJsonRequest < Net::HTTP::Post
     def initialize(path, data)
       super(path)
       self['Content-Type'] = 'application/json'
