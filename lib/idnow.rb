@@ -42,7 +42,7 @@ module Idnow
       @host = Host::LIVE_SERVER
       @target_host = TargetHost::LIVE_SERVER
     else
-      raise ArgumentError, 'Please provide a valid enviroment, :test or :live'
+      fail ArgumentError, 'Please provide a valid enviroment, :test or :live'
     end
   end
 
@@ -57,14 +57,14 @@ module Idnow
   end
 
   def test_env?
-    raise 'Please set env to :test or :live' if host.nil?
+    fail 'Please set env to :test or :live' if host.nil?
     Idnow.host.include?('test')
   end
 
   def client
-    raise 'Please set your company_id' if company_id.nil?
-    raise 'Please set your api_key' if api_key.nil?
-    raise 'Please set env to :test or :live' if host.nil?
+    fail 'Please set your company_id' if company_id.nil?
+    fail 'Please set your api_key' if api_key.nil?
+    fail 'Please set env to :test or :live' if host.nil?
     @client ||= Idnow::Client.new(host: host, company_id: company_id, api_key: api_key)
   end
 

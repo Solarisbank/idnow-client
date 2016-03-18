@@ -2,7 +2,7 @@ module Idnow
   module API
     module DocumentDefinitions
       def create_document_definition(document_data)
-        raise Idnow::AuthenticationException if @auth_token.nil?
+        fail Idnow::AuthenticationException if @auth_token.nil?
 
         path = full_path_for('documentdefinitions')
         request = Idnow::PostRequest.new(path, document_data)

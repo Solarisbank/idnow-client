@@ -33,6 +33,9 @@ Style/BracesAroundHashParameters:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 # Offense count: 1
 # Configuration parameters: ExpectMatchingDefinition, Regex, IgnoreExecutableScripts.
 Style/FileName:

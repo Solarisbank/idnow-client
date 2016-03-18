@@ -13,7 +13,7 @@ module Idnow
 
     def initialize(params = {})
       params.keys.each do |key|
-        raise ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
+        fail ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
 
         send("#{key}=", params[key])
       end
@@ -42,7 +42,7 @@ module Idnow
     end
 
     def country=(country)
-      raise ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
+      fail ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
 
       @country = country.upcase
     end
@@ -53,7 +53,7 @@ module Idnow
       elsif %w(F FEMALE).include?(gender.to_s.strip.upcase)
         @gender = Gender::FEMALE
       else
-        raise ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
+        fail ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
       end
     end
   end

@@ -28,7 +28,7 @@ module Idnow
     def execute(request, headers = {}, http_client: @http_client)
       http_response = http_client.execute(request, headers)
       Idnow::Response.new(http_response.body).tap do |r|
-        raise Idnow::ResponseException, r.errors if r.errors?
+        fail Idnow::ResponseException, r.errors if r.errors?
       end
     end
 
