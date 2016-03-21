@@ -3,7 +3,8 @@ require 'idnow/API/automated_testing' # shouldn't be included by default
 require 'idnow/API/request_identifications'
 require 'idnow/API/retrieve_identifications'
 require 'idnow/API/document_definitions'
-require 'idnow/API/upload_signed_documents'
+require 'idnow/API/upload_documents'
+require 'idnow/API/download_documents'
 
 module Idnow
   class Client
@@ -12,7 +13,8 @@ module Idnow
     include Idnow::API::RequestIdentifications
     include Idnow::API::AutomatedTesting
     include Idnow::API::DocumentDefinitions
-    include Idnow::API::UploadSignedDocuments
+    include Idnow::API::UploadDocuments
+    include Idnow::API::DownloadDocuments
 
     API_VERSION = 'v1'.freeze
 
@@ -27,7 +29,14 @@ module Idnow
 
     def execute(request, headers = {}, http_client: @http_client)
       http_response = http_client.execute(request, headers)
-      Idnow::Response.new(http_response.body).tap do |r|
+
+      response = if request.content_type == 'application/json'
+                   Idnow::JsonResponse.new(http_response.body)
+                 else
+                   Idnow::RawResponse.new(http_response.body)
+                 end
+
+      response.tap do |r|
         fail Idnow::ResponseException, r.errors if r.errors?
       end
     end

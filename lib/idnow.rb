@@ -3,10 +3,11 @@ require 'idnow/client'
 
 require 'idnow/http_client'
 require 'idnow/sftp_client'
-require 'idnow/post_request'
+require 'idnow/post_json_request'
 require 'idnow/post_binary_request'
 require 'idnow/get_request'
-require 'idnow/response'
+require 'idnow/raw_response'
+require 'idnow/json_response'
 require 'idnow/exception'
 
 require 'idnow/models/login'

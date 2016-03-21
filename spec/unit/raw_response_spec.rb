@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe Idnow::Response do
-  let(:idnow_response) { Idnow::Response.new(response) }
-  let(:successful_raw_response) { '{"was":"successful"}' }
+RSpec.describe Idnow::RawResponse do
+  let(:idnow_response) { Idnow::RawResponse.new(response) }
+  let(:successful_raw_response) { 'was successful' }
   let(:failure_raw_response) do
     '{
                                   "errors": [{
@@ -14,9 +14,9 @@ RSpec.describe Idnow::Response do
   describe '#new' do
     let(:response) { successful_raw_response }
     subject { idnow_response }
-    it 'sets data to the hash resulting of parsing the raw_response' do
-      data = subject.instance_variable_get('@data')
-      expect(data).to be_a Hash
+
+    it 'sets raw' do
+      expect(subject.raw).to eq 'was successful'
     end
   end
 

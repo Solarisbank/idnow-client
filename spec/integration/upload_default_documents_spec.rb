@@ -1,20 +1,19 @@
 require 'spec_helper'
 
-RSpec.describe 'upload signed documents', :stub_connect do
-  subject { client.upload_document(transaction_number, document_definition_identifier, file) }
+RSpec.describe 'upload default documents', :stub_connect do
+  subject { client.upload_default_document(document_definition_identifier, file) }
 
-  let(:transaction_number) { '12345' }
   let(:document_definition_identifier) { 'testdoc' }
   let(:file) { File.open('spec/support/test_files/example.txt', 'r') }
-  let(:binary_file_data) { File.read(file).unpack('b*').first }
+  let(:file_data) { File.read(file) }
 
   before do
     login
   end
 
   let!(:request) do
-    stub_request(:post, idnow_url("/identifications/#{transaction_number}/documents/#{document_definition_identifier}/data"))
-      .with(body: binary_file_data,
+    stub_request(:post, idnow_url("/documentdefinitions/#{document_definition_identifier}/data"))
+      .with(body: file_data,
             headers: { 'Content-Type' => 'application/octet-stream', 'X-Api-Login-Token' => 'nekoThtua' })
       .to_return(status: 200, body: response_body, headers: {})
   end

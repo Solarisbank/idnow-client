@@ -15,7 +15,7 @@ RSpec.describe Idnow::HttpClient do
   describe '#execute' do
     subject { http_client.execute(post_request) }
 
-    let(:post_request) { Idnow::PostRequest.new(path, {}) }
+    let(:post_request) { Idnow::PostJsonRequest.new(path, {}) }
     let(:path) { "#{host}/some/path" }
 
     context 'whent the request is successfull' do
