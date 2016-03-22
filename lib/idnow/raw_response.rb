@@ -3,7 +3,7 @@ module Idnow
     attr_reader :raw
 
     def initialize(raw_response)
-      @raw = raw_response
+      @raw = raw_response.nil? ? raw_response.to_s : raw_response
     end
 
     # IDNow API always returns JSON-formatted errors,

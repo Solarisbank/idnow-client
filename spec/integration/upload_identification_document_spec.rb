@@ -20,7 +20,7 @@ RSpec.describe 'upload identification document', :stub_connect do
   end
 
   context 'when the document definition is sucessful' do
-    let(:response_body) { '{}' }
+    let(:response_body) { '' }
     it 'makes a request to the server' do
       subject
       expect(request).to have_been_made
