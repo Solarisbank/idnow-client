@@ -5,10 +5,11 @@ RSpec.describe Idnow::SftpClient do
   let(:host) { Idnow::Host::TEST_SERVER }
   let(:username) { 'username' }
   let(:password) { 'password' }
-  let(:path) { '/some/file.zip' }
+  let(:base_path) { '/some/where' }
+  let(:path) { '/file.zip' }
 
   describe '#download' do
-    subject { sftp_client.download(path) }
+    subject { sftp_client.download(base_path, path) }
 
     let(:sftp_double) { double('sdftp') }
     let(:file_double) { double('file') }
@@ -36,7 +37,7 @@ RSpec.describe Idnow::SftpClient do
         returned_data = 'data'
         before do
           allow(sftp_double).to receive(:download!).with(path).and_return(returned_data)
-          allow(File).to receive(:open).with(path, 'w').and_yield(file_double)
+          allow(File).to receive(:open).with(File.join(base_path, path), 'w').and_yield(file_double)
           allow(file_double).to receive(:write).with(returned_data).and_return('FILE')
         end
         it 'creates a file with the contents downloaded from idnow' do
