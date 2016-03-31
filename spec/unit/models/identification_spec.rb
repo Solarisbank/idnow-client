@@ -3,7 +3,8 @@ require 'spec_helper'
 RSpec.describe Idnow::Identification do
   subject { identification }
 
-  let(:identification) { build(:idnow_identification) }
+  let(:identification) { build(:idnow_identification, esigning: esigning) }
+  let(:esigning) { false }
 
   describe 'delegators' do
     it { should delegate_method(:result).to(:identification_process) }
@@ -59,6 +60,37 @@ RSpec.describe Idnow::Identification do
                           'idfrontside' => '28_idfrontside.jpg',
                           'userface'    => '28_userface.jpg'
                         })
+    end
+  end
+
+  describe '#esigning?' do
+    subject { identification.esigning? }
+    context 'with esigning' do
+      let(:esigning) { true }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'without esigning' do
+      let(:esigning) { false }
+      it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#esigning' do
+    subject { identification.esigning }
+    context 'with esigning' do
+      let(:esigning) { true }
+      it 'returns an esigning' do
+        is_expected.to eq({
+                            'result' => 'SUCCESS',
+                            'sessionid' => '3XIDNOW-SERVID01-_-20160330140640-7B4C7736M47BE285'
+                          })
+      end
+    end
+
+    context 'without esigning' do
+      let(:esigning) { false }
+      it { is_expected.to be_nil }
     end
   end
 end

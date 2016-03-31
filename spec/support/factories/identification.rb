@@ -9,9 +9,10 @@ FactoryGirl.define do
     transient do
       result 'SUCCESS'
       transaction_number '28'
+      esigning false
 
       idnow_identification_hash do
-        build(:idnow_identification_hash, result: result, transaction_number: transaction_number)
+        build(:idnow_identification_hash, result: result, transaction_number: transaction_number, esigning: esigning)
       end
     end
   end
@@ -23,8 +24,19 @@ FactoryGirl.define do
 
     result 'SUCCESS'
     transaction_number '28'
+    esigning false
 
     initialize_with do
+      esigning_json = if esigning == false
+                        ''
+                      else
+                        '
+                          "esigning": {
+                            "result": "SUCCESS",
+                            "sessionid": "3XIDNOW-SERVID01-_-20160330140640-7B4C7736M47BE285"
+                          },
+                        '
+                      end
       JSON.parse(<<-JSON)
         {
           "identificationprocess": {
@@ -38,6 +50,7 @@ FactoryGirl.define do
             "type": "WEB",
             "transactionnumber": "#{transaction_number}"
           },
+          #{esigning_json}
           "customdata": {
             "custom3": null,
             "custom4": null,
