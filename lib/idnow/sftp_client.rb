@@ -8,13 +8,11 @@ module Idnow
       @password = password
     end
 
-    def download(destination_path, path)
+    def download(file_name)
       Net::SFTP.start(@host, @username, password: @password) do |sftp|
-        fail Idnow::Exception, "Invalid path. No identification file found under #{path}" if sftp.dir['.', path].empty?
+        fail Idnow::Exception, "Invalid path. No identification file found under #{file_name}" if sftp.dir['.', file_name].empty?
         begin
-          data = sftp.download!(path)
-          path = File.join(destination_path, path)
-          File.open(path, 'w') { |f| f.write(data) }
+          sftp.download!(file_name)
         rescue Net::SFTP::Exception => e
           raise Idnow::ConnectionException, e
         end
