@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::Client do
-  let(:client) { Idnow::Client.new(host: host, company_id: company_id, api_key: api_key) }
-  let(:host) { Idnow::Host::TEST_SERVER }
+  let(:client) { Idnow::Client.new(env: env, company_id: company_id, api_key: api_key) }
+  let(:env) { :test }
   let(:company_id) { 'solaris' }
   let(:api_key) { 'api_key' }
 

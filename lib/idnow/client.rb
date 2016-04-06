@@ -18,11 +18,19 @@ module Idnow
 
     API_VERSION = 'v1'.freeze
 
-    def initialize(host:, company_id:, api_key:)
-      @http_client = HttpClient.new(host: host)
-      @sftp_client = SftpClient.new(host: host, username: company_id, password: api_key)
-      @company_id = company_id
-      @api_key = api_key
+    attr_reader :host
+
+    def initialize(env:, company_id:, api_key:)
+      fail 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
+      fail 'Please set your company_id' if company_id.nil?
+      fail 'Please set your api_key' if api_key.nil?
+      @host        = Idnow::ENVIRONMENTS[env][:host]
+      @target_host = Idnow::ENVIRONMENTS[env][:target_host]
+      @company_id  = company_id
+      @api_key     = api_key
+
+      @http_client = HttpClient.new(host: @host)
+      @sftp_client = SftpClient.new(host: @host, username: @company_id, password: @api_key)
     end
 
     private

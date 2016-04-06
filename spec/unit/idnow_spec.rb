@@ -63,24 +63,24 @@ RSpec.describe Idnow do
 
     context 'if company_id is not set' do
       before do
-        Idnow.instance_variable_set(:@host, 'host')
-        Idnow.instance_variable_set(:@api_key, 'api_key')
+        Idnow.env = :test
+        Idnow.api_key = 'some key'
       end
       it { expect { subject }.to raise_error(RuntimeError, 'Please set your company_id') }
     end
 
     context 'if api_key is not set' do
       before do
-        Idnow.instance_variable_set(:@company_id, 'somecompany')
-        Idnow.instance_variable_set(:@host, 'host')
+        Idnow.env = :test
+        Idnow.company_id = 'somecompany'
       end
       it { expect { subject }.to raise_error(RuntimeError, 'Please set your api_key') }
     end
 
     context 'if env is not set' do
       before do
-        Idnow.instance_variable_set(:@api_key, 'api_key')
-        Idnow.instance_variable_set(:@company_id, 'some_company')
+        Idnow.company_id = 'somecompany'
+        Idnow.api_key = 'some key'
       end
       it { expect { subject }.to raise_error(RuntimeError, 'Please set env to :test or :live') }
     end
