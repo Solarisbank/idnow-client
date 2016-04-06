@@ -57,11 +57,6 @@ module Idnow
     @api_key = api_key
   end
 
-  def test_env?
-    fail 'Please set env to :test or :live' if host.nil?
-    Idnow.host.include?('test')
-  end
-
   def client
     fail 'Please set your company_id' if company_id.nil?
     fail 'Please set your api_key' if api_key.nil?
@@ -70,5 +65,5 @@ module Idnow
   end
 
   module_function :host, :target_host, :company_id, :api_key, :env=,
-                  :company_id=, :api_key=, :test_env?, :client
+                  :company_id=, :api_key=, :client
 end
