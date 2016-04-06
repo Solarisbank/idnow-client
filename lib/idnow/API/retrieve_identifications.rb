@@ -27,9 +27,9 @@ module Idnow
         Idnow::Identification.new(response.data)
       end
 
-      def download_identification(transaction_number:, destination_path:)
+      def download_identification(transaction_number:)
         path = "#{transaction_number}.zip"
-        @sftp_client.download(destination_path, path)
+        @sftp_client.download(path)
       end
     end
   end
