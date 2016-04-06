@@ -1,51 +1,34 @@
 require 'spec_helper'
 
 RSpec.describe Idnow do
+  after do
+    Idnow.instance_variable_set(:@env, nil)
+    Idnow.instance_variable_set(:@company_id, nil)
+    Idnow.instance_variable_set(:@api_key, nil)
+    Idnow.instance_variable_set(:@client, nil)
+  end
+
   describe '.env=' do
-    before do
-      Idnow.instance_variable_set(:@host, 'http://any-host.com')
-      Idnow.instance_variable_set(:@target_host, 'http://any-redirect-host.com')
-    end
     subject { Idnow.env = env }
 
-    context 'if :test env is given' do
-      let(:env) { :test }
-      it 'resets client' do
-        Idnow.instance_variable_set(:@client, 'dummy')
-        expect { subject }.to change { Idnow.instance_variable_get(:@client) }.to(nil)
-      end
-      it 'sets the host to Idnow::Host::TEST_SERVER' do
-        expect { subject }.to change { Idnow.instance_variable_get(:@host) }.to(Idnow::Host::TEST_SERVER)
-      end
-      it 'sets the target_host to Idnow::TargetHost::TEST_SERVER' do
-        expect { subject }.to change { Idnow.instance_variable_get(:@target_host) }.to(Idnow::TargetHost::TEST_SERVER)
-      end
+    let(:env) { :test }
+
+    it 'resets client' do
+      Idnow.instance_variable_set(:@client, 'dummy')
+      expect { subject }.to change { Idnow.instance_variable_get(:@client) }.to(nil)
     end
 
-    context 'if :live env is given' do
-      let(:env) { :live }
-      it 'resets client' do
-        Idnow.instance_variable_set(:@client, 'dummy')
-        expect { subject }.to change { Idnow.instance_variable_get(:@client) }.to(nil)
-      end
-      it 'sets the host to Idnow::Host::LIVE_SERVER' do
-        expect { subject }.to change { Idnow.instance_variable_get(:@host) }.to(Idnow::Host::LIVE_SERVER)
-      end
-      it 'sets the target_host to Idnow::TargetHost::LIVE_SERVER' do
-        expect { subject }.to change { Idnow.instance_variable_get(:@target_host) }.to(Idnow::TargetHost::LIVE_SERVER)
-      end
+    it 'sets env' do
+      expect { subject }.to change { Idnow.instance_variable_get(:@env) }.to(env)
     end
 
-    context 'if an invalid env is given' do
+    context 'when invalid env is given' do
       let(:env) { :invalid }
       it { expect { subject }.to raise_error(ArgumentError) }
     end
   end
 
   describe '.company_id=' do
-    before do
-      Idnow.company_id = 'anycompany'
-    end
     subject { Idnow.company_id = company_id }
 
     let(:company_id) { 'somecompany' }
@@ -61,9 +44,6 @@ RSpec.describe Idnow do
   end
 
   describe '.api_key=' do
-    before do
-      Idnow.api_key = 'anykey'
-    end
     subject { Idnow.api_key = api_key }
 
     let(:api_key) { 'api_key' }
@@ -83,7 +63,6 @@ RSpec.describe Idnow do
 
     context 'if company_id is not set' do
       before do
-        Idnow.instance_variable_set(:@company_id, nil)
         Idnow.instance_variable_set(:@host, 'host')
         Idnow.instance_variable_set(:@api_key, 'api_key')
       end
@@ -92,7 +71,6 @@ RSpec.describe Idnow do
 
     context 'if api_key is not set' do
       before do
-        Idnow.instance_variable_set(:@api_key, nil)
         Idnow.instance_variable_set(:@company_id, 'somecompany')
         Idnow.instance_variable_set(:@host, 'host')
       end
@@ -101,7 +79,6 @@ RSpec.describe Idnow do
 
     context 'if env is not set' do
       before do
-        Idnow.instance_variable_set(:@host, nil)
         Idnow.instance_variable_set(:@api_key, 'api_key')
         Idnow.instance_variable_set(:@company_id, 'some_company')
       end
@@ -113,7 +90,6 @@ RSpec.describe Idnow do
         Idnow.env = :test
         Idnow.company_id = 'somecompany'
         Idnow.api_key = 'some key'
-        Idnow.instance_variable_set(:@client, nil)
       end
 
       it { is_expected.to be_a(Idnow::Client) }
