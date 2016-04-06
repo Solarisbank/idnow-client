@@ -34,11 +34,11 @@ module Idnow
   ENVIRONMENTS = {
     test: {
       host: Host::TEST_SERVER,
-      target_host: TargetHost::TEST_SERVER
+      target_host: TargetHost::TEST_SERVER,
     },
     live: {
       host: Host::LIVE_SERVER,
-      target_host: TargetHost::LIVE_SERVER
+      target_host: TargetHost::LIVE_SERVER,
     }
   }.freeze
 
@@ -58,22 +58,9 @@ module Idnow
     @api_key = api_key
   end
 
-  # temp reader until this is into client
-  def target_host
-    ENVIRONMENTS[@env][:target_host]
-  end
-
-  def company_id
-    @company_id
-  end
-
   def client
-    fail 'Please set your company_id' if @company_id.nil?
-    fail 'Please set your api_key' if @api_key.nil?
-    fail 'Please set env to :test or :live' if @env.nil?
-    @client ||= Idnow::Client.new(host: ENVIRONMENTS[@env][:host], company_id: @company_id, api_key: @api_key)
+    @client ||= Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key)
   end
 
   module_function :env=, :company_id=, :api_key=, :client
-  module_function :target_host, :company_id
 end
