@@ -21,8 +21,6 @@ require 'idnow/models/identification_data'
 require 'idnow/models/login_data'
 
 module Idnow
-  attr_reader :host, :target_host, :company_id, :api_key
-
   module Host # Used to request an identification through the idnow API
     TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
     LIVE_SERVER = 'https://gateway.idnow.de'.freeze
@@ -33,18 +31,21 @@ module Idnow
     LIVE_SERVER = 'https://go.idnow.de'.freeze
   end
 
+  ENVIRONMENTS = {
+    test: {
+      host: Host::TEST_SERVER,
+      target_host: TargetHost::TEST_SERVER
+    },
+    live: {
+      host: Host::LIVE_SERVER,
+      target_host: TargetHost::LIVE_SERVER
+    }
+  }.freeze
+
   def env=(env)
-    if env == :test
-      @client = nil
-      @host = Host::TEST_SERVER
-      @target_host = TargetHost::TEST_SERVER
-    elsif env == :live
-      @client = nil
-      @host = Host::LIVE_SERVER
-      @target_host = TargetHost::LIVE_SERVER
-    else
-      fail ArgumentError, 'Please provide a valid enviroment, :test or :live'
-    end
+    fail ArgumentError, 'Please provide a valid enviroment, :test or :live' unless ENVIRONMENTS.keys.include?(env)
+    @client = nil
+    @env = env
   end
 
   def company_id=(company_id)
@@ -57,13 +58,22 @@ module Idnow
     @api_key = api_key
   end
 
-  def client
-    fail 'Please set your company_id' if company_id.nil?
-    fail 'Please set your api_key' if api_key.nil?
-    fail 'Please set env to :test or :live' if host.nil?
-    @client ||= Idnow::Client.new(host: host, company_id: company_id, api_key: api_key)
+  # temp reader until this is into client
+  def target_host
+    ENVIRONMENTS[@env][:target_host]
   end
 
-  module_function :host, :target_host, :company_id, :api_key, :env=,
-                  :company_id=, :api_key=, :client
+  def company_id
+    @company_id
+  end
+
+  def client
+    fail 'Please set your company_id' if @company_id.nil?
+    fail 'Please set your api_key' if @api_key.nil?
+    fail 'Please set env to :test or :live' if @env.nil?
+    @client ||= Idnow::Client.new(host: ENVIRONMENTS[@env][:host], company_id: @company_id, api_key: @api_key)
+  end
+
+  module_function :env=, :company_id=, :api_key=, :client
+  module_function :target_host, :company_id
 end
