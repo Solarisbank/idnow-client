@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = '0.1.0'
+  spec.version       = '0.2.0'
   spec.authors       = ['Dominic Breuker, Joan Martinez']
   spec.email         = ['joan.martinez@hitfoxgroup']
 
@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'net-sftp', '~>2.1'
+
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'webmock', '~> 1.22'
   spec.add_development_dependency 'simplecov', '~> 0.10'
