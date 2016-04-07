@@ -19,7 +19,7 @@ RSpec.describe Idnow::IdentificationRequest do
     subject { identification_request.redirect_url }
 
     it 'returns a test redirect url' do
-      is_expected.to eq "https://go.test.idnow.de/#{company_id}/identifications/#{transaction_number}/identification/start"
+      is_expected.to eq "https://go.test.idnow.de/#{company_id}/identifications/#{transaction_number}"
     end
   end
 end

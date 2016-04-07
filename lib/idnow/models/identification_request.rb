@@ -10,7 +10,7 @@ module Idnow
     end
 
     def redirect_url
-      "#{@target_host}/#{@company_id}/identifications/#{@transaction_number}/identification/start"
+      "#{@target_host}/#{@company_id}/identifications/#{@transaction_number}"
     end
   end
 end

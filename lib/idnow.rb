@@ -34,11 +34,11 @@ module Idnow
   ENVIRONMENTS = {
     test: {
       host: Host::TEST_SERVER,
-      target_host: TargetHost::TEST_SERVER,
+      target_host: TargetHost::TEST_SERVER
     },
     live: {
       host: Host::LIVE_SERVER,
-      target_host: TargetHost::LIVE_SERVER,
+      target_host: TargetHost::LIVE_SERVER
     }
   }.freeze
 
