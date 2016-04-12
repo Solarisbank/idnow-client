@@ -77,4 +77,22 @@ RSpec.describe Idnow::IdentificationProcess do
       it { is_expected.to be_falsey }
     end
   end
+
+  describe '#review_pending?' do
+    subject { identification_process.review_pending? }
+
+    let(:identification_process) { build(:idnow_identification, result: result).identification_process }
+
+    context 'when result was REVIEW_PENDING' do
+      let(:result) { 'REVIEW_PENDING' }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when result is not REVIEW_PENDING' do
+      let(:result) { 'FRAUD_SUSPICION_CONFIRMED' }
+
+      it { is_expected.to be_falsey }
+    end
+  end
 end

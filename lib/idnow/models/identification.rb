@@ -19,6 +19,6 @@ module Idnow
     def esigning?
       !@esigning.nil?
     end
-    def_delegators :identification_process, :successful?, :result, :reason, :id, :transaction_number
+    def_delegators :identification_process, :successful?, :result, :reason, :id, :transaction_number, :review_pending?
   end
 end
