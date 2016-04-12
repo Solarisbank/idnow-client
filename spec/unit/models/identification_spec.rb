@@ -12,6 +12,7 @@ RSpec.describe Idnow::Identification do
     it { should delegate_method(:id).to(:identification_process) }
     it { should delegate_method(:transaction_number).to(:identification_process) }
     it { should delegate_method(:successful?).to(:identification_process) }
+    it { should delegate_method(:review_pending?).to(:identification_process) }
   end
 
   describe '#identification_process' do

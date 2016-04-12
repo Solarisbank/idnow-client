@@ -21,5 +21,9 @@ module Idnow
     def successful?
       SUCCESSFUL_RESPONSES.include?(result)
     end
+
+    def review_pending?
+      result == 'REVIEW_PENDING'
+    end
   end
 end
