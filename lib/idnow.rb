@@ -18,6 +18,7 @@ require 'idnow/models/identification_process'
 require 'idnow/models/user_data'
 require 'idnow/models/contact_data'
 require 'idnow/models/identification_data'
+require 'idnow/models/identification_document'
 require 'idnow/models/login_data'
 
 module Idnow

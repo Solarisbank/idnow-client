@@ -39,14 +39,8 @@ RSpec.describe Idnow::Identification do
   describe '#identification_document' do
     subject { identification.identification_document }
 
-    it 'returns an indentification process' do
-      is_expected.to eq({
-                          'country' => { 'value' => 'DE', 'status' => 'NEW' },
-                          'number' => { 'value' => '123456789', 'status' => 'NEW' },
-                          'issuedby' => { 'value' => 'ISSUER', 'status' => 'NEW' },
-                          'dateissued' => { 'value' => '2010-10-12', 'status' => 'NEW' },
-                          'type' => { 'value' => 'IDCARD', 'status' => 'NEW' },
-                          'validuntil' => { 'value' => '2020-10-11', 'status' => 'NEW' } })
+    it 'returns an indentification document' do
+      is_expected.to be_a Idnow::IdentificationDocument
     end
   end
 
