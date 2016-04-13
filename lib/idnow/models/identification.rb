@@ -11,7 +11,7 @@ module Idnow
       @identification_process  = IdentificationProcess.new(data['identificationprocess'])
       @contact_data            = ContactData.new(data['contactdata'])
       @user_data               = UserData.new(data['userdata'])
-      @identification_document = data['identificationdocument']
+      @identification_document = IdentificationDocument.new(data['identificationdocument'])
       @attachments             = data['attachments']
       @esigning                = data['esigning']
     end
