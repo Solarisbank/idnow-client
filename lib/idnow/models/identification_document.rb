@@ -12,6 +12,14 @@ module Idnow
       @valid_until         = dig_value('validuntil', data)
     end
 
+    def date_issued
+      Date.parse(@date_issued) if @date_issued
+    end
+
+    def valid_until
+      Date.parse(@valid_until) if @valid_until
+    end
+
     private
 
     def dig_value(*keys, data)

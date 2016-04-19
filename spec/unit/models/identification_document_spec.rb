@@ -20,7 +20,7 @@ RSpec.describe Idnow::IdentificationDocument do
 
   describe '#date_issued' do
     subject { identification_document.date_issued }
-    it { is_expected.to eq '2010-10-12' }
+    it { is_expected.to eq(Date.parse('2010-10-12')) }
   end
 
   describe '#type' do
@@ -30,6 +30,6 @@ RSpec.describe Idnow::IdentificationDocument do
 
   describe '#valid_until' do
     subject { identification_document.valid_until }
-    it { is_expected.to eq '2020-10-11' }
+    it { is_expected.to eq(Date.parse('2020-10-11')) }
   end
 end
