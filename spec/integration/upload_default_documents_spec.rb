@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe 'upload default documents', :stub_connect do
-  subject { client.upload_default_document(document_definition_identifier, file) }
+  subject { client.upload_default_document(document_definition_identifier, file_data) }
 
   let(:document_definition_identifier) { 'testdoc' }
-  let(:file) { File.open('spec/support/test_files/example.txt', 'r') }
-  let(:file_data) { File.read(file) }
+  let(:file_path) { 'spec/support/test_files/example.txt' }
+  let(:file_data) { File.read(file_path) }
 
   before do
     login

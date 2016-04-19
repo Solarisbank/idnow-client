@@ -8,7 +8,6 @@ end
 require 'rspec'
 require 'factory_girl'
 require 'webmock/rspec'
-require 'pry'
 require 'shoulda/matchers'
 
 require 'idnow'

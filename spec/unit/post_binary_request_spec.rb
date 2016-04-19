@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 RSpec.describe Idnow::PostBinaryRequest do
   let(:path) { 'api/v1/company_id/identifications/any/path' }
