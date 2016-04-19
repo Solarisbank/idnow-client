@@ -100,10 +100,10 @@ RSpec.describe Idnow::Client do
   end
 
   describe '#upload_identification_document' do
-    subject { client.upload_identification_document(transaction_number, document_definition_identifier, file) }
+    subject { client.upload_identification_document(transaction_number, document_definition_identifier, file_data) }
     let(:transaction_number) { '12345' }
     let(:document_definition_identifier) { 'cool_doc' }
-    let(:file) { File.open('spec/support/test_files/example.txt', 'r') }
+    let(:file_data) { File.read('spec/support/test_files/example.txt') }
 
     # log in user
     before do
@@ -115,11 +115,6 @@ RSpec.describe Idnow::Client do
         client.instance_variable_set(:@auth_token, nil)
       end
       it { expect { subject }.to raise_error Idnow::AuthenticationException }
-    end
-
-    context 'when the file does not inherit from IO' do
-      let(:file) { 'A string' }
-      it { expect { subject }.to raise_error Idnow::InvalidArguments }
     end
 
     context 'when the user logged in and sent a valid file' do

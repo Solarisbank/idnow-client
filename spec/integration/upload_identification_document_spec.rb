@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe 'upload identification document', :stub_connect do
-  subject { client.upload_identification_document(transaction_number, document_definition_identifier, file) }
+  subject { client.upload_identification_document(transaction_number, document_definition_identifier, file_data) }
 
   let(:transaction_number) { '12345' }
   let(:document_definition_identifier) { 'testdoc' }
-  let(:file) { File.open('spec/support/test_files/example.txt', 'r') }
-  let(:file_data) { File.read(file) }
+  let(:file_path) { 'spec/support/test_files/example.txt' }
+  let(:file_data) { File.read(file_path) }
 
   before do
     login
