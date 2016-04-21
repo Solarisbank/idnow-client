@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'pry'
 module Idnow
   class Identification
     extend Forwardable
@@ -11,7 +12,7 @@ module Idnow
       @identification_process  = IdentificationProcess.new(data['identificationprocess'])
       @contact_data            = ContactData.new(data['contactdata'])
       @user_data               = UserData.new(data['userdata'])
-      @identification_document = IdentificationDocument.new(data['identificationdocument'])
+      @identification_document = IdentificationDocument.new(data.fetch('identificationdocument', {}))
       @attachments             = data['attachments']
       @esigning                = data['esigning']
     end

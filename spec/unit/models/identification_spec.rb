@@ -42,6 +42,15 @@ RSpec.describe Idnow::Identification do
     it 'returns an indentification document' do
       is_expected.to be_a Idnow::IdentificationDocument
     end
+
+    context 'when the initialization hash does not have a identificationdocument key' do
+      let(:idnow_identification_hash) { build(:idnow_identification_hash).tap { |hs| hs.delete('identificationdocument') } }
+      let(:identification) { build(:idnow_identification, idnow_identification_hash: idnow_identification_hash, esigning: false) }
+
+      it 'returns an indentification document' do
+        is_expected.to be_a Idnow::IdentificationDocument
+      end
+    end
   end
 
   describe '#attachments' do
