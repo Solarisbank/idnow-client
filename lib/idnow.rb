@@ -20,6 +20,7 @@ require 'idnow/models/contact_data'
 require 'idnow/models/identification_data'
 require 'idnow/models/identification_document'
 require 'idnow/models/login_data'
+require 'idnow/models/document_definition'
 
 module Idnow
   module Host # Used to request an identification through the idnow API

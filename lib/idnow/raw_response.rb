@@ -11,7 +11,7 @@ module Idnow
     def errors
       if valid_json?(@raw)
         json_data = JSON.parse(@raw)
-        json_data['errors']
+        json_data['errors'] if json_data.class == Hash
       end
     end
 
