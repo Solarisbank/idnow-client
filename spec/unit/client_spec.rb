@@ -134,4 +134,27 @@ RSpec.describe Idnow::Client do
       end
     end
   end
+
+  describe 'list_cached_document_definitions' do
+    subject { client.list_cached_document_definitions }
+    before { client.instance_variable_set(:@auth_token, 'token') }
+
+    context 'when the document definitions are not cached' do
+      before { client.instance_variable_set(:@document_definitions, nil) }
+      it 'calls list_document_definitions' do
+        expect(client).to receive(:list_document_definitions).and_return([])
+        subject
+      end
+    end
+
+    context 'when the document definitions are cached' do
+      before { client.instance_variable_set(:@document_definitions, %w(doc1 doc2)) }
+      it 'does not call list_document_definitions' do
+        expect(client).not_to receive(:list_document_definitions)
+        subject
+      end
+
+      it { is_expected.to eq %w(doc1 doc2) }
+    end
+  end
 end

@@ -19,6 +19,10 @@ module Idnow
           Idnow::DocumentDefinition.new(data)
         end
       end
+
+      def list_cached_document_definitions
+        @document_definitions ||= list_document_definitions
+      end
     end
   end
 end
