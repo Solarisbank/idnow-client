@@ -20,7 +20,8 @@ module Idnow
         end
       end
 
-      def list_cached_document_definitions
+      def list_cached_document_definitions(refresh = false)
+        return @document_definitions = list_document_definitions if refresh
         @document_definitions ||= list_document_definitions
       end
     end
