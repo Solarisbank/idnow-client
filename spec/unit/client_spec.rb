@@ -136,14 +136,27 @@ RSpec.describe Idnow::Client do
   end
 
   describe 'list_cached_document_definitions' do
-    subject { client.list_cached_document_definitions }
-    before { client.instance_variable_set(:@auth_token, 'token') }
+    subject { client.list_cached_document_definitions(refresh) }
+    let(:refresh) { false }
+    before do
+      client.instance_variable_set(:@auth_token, 'token')
+      allow(client).to receive(:list_document_definitions).and_return(%w(doc1 doc2))
+    end
 
     context 'when the document definitions are not cached' do
       before { client.instance_variable_set(:@document_definitions, nil) }
       it 'calls list_document_definitions' do
-        expect(client).to receive(:list_document_definitions).and_return([])
+        expect(client).to receive(:list_document_definitions).and_return(%w(doc1 doc2))
         subject
+      end
+
+      it 'sets @document_definitions' do
+        subject
+        expect(client.instance_variable_get(:@document_definitions)).to eq %w(doc1 doc2)
+      end
+
+      it 'returns the document definitions' do
+        expect(subject).to eq(%w(doc1 doc2))
       end
     end
 
@@ -155,6 +168,30 @@ RSpec.describe Idnow::Client do
       end
 
       it { is_expected.to eq %w(doc1 doc2) }
+    end
+
+    context 'when the refresh flag is true' do
+      let(:refresh) { true }
+
+      before do
+        client.instance_variable_set(:@document_definitions, %w(doc1 doc2))
+        allow(client).to receive(:list_document_definitions).and_return(['doc3'])
+      end
+
+      it 'always calls list_document_definitions' do
+        expect(client).to receive(:list_document_definitions).and_return(['doc3'])
+        subject
+      end
+
+      it 'updates @document_definitions' do
+        subject
+        expect(client.instance_variable_get(:@document_definitions)).to eq ['doc3']
+      end
+
+      it 'returns the document definitions' do
+        allow(client).to receive(:list_document_definitions).and_return(['doc3'])
+        expect(subject).to eq(['doc3'])
+      end
     end
   end
 end
