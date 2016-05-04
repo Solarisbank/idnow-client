@@ -2,19 +2,17 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = '0.2.0'
-  spec.authors       = ['Dominic Breuker, Joan Martinez']
-  spec.email         = ['joan.martinez@hitfoxgroup']
+  spec.version       = '1.0.0'
+  spec.authors       = ['Joan Martinez, Tobias Bielohlawek']
+  spec.email         = ['joan.martinez.ripoll@gmail.com']
 
   spec.summary       = 'Ruby client for the IDnow API'
   spec.description   = 'Library to consume the IDnow API in Ruby, http://www.idnow.eu/developers'
-  spec.homepage      = 'http://example.com'
-  spec.license       = 'MIT'
 
-  # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
-  # delete this section to allow pushing this gem to any host.
   fail 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless spec.respond_to?(:metadata)
-  spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
+
+  spec.homepage      = 'https://github.com/solarisBank/idnow-client'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'
