@@ -35,9 +35,3 @@ Style/Documentation:
 
 Style/GuardClause:
   Enabled: false
-
-# Offense count: 1
-# Configuration parameters: ExpectMatchingDefinition, Regex, IgnoreExecutableScripts.
-Style/FileName:
-  Exclude:
-    - 'lib/solaris/oauth2-error_monkey-patch.rb'
