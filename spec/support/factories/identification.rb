@@ -8,11 +8,13 @@ FactoryGirl.define do
 
     transient do
       result 'SUCCESS'
+      reason nil
       transaction_number '28'
       esigning false
 
       idnow_identification_hash do
-        build(:idnow_identification_hash, result: result, transaction_number: transaction_number, esigning: esigning)
+        build(:idnow_identification_hash, reason: reason, result: result,
+                                          transaction_number: transaction_number, esigning: esigning)
       end
     end
   end
@@ -23,6 +25,7 @@ FactoryGirl.define do
     skip_create
 
     result 'SUCCESS'
+    reason nil
     transaction_number '28'
     esigning false
 
@@ -37,10 +40,13 @@ FactoryGirl.define do
                           },
                         '
                       end
+      reason_json = reason.nil? ? '' : "\"reason\": \"#{reason}\", "
+
       JSON.parse(<<-JSON)
         {
           "identificationprocess": {
             "result": "#{result}",
+            #{reason_json}
             "companyid": "ihrebank",
             "filename": "#{transaction_number}.zip",
             "agentname": "TROBOT",
