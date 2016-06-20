@@ -97,4 +97,9 @@ RSpec.describe Idnow::Identification do
       it { is_expected.to be_nil }
     end
   end
+
+  describe 'raw_data' do
+    subject { identification.raw_data }
+    it { is_expected.to eq build(:idnow_identification_hash) }
+  end
 end
