@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = '1.0.0'
+  spec.version       = '1.1.0'
   spec.authors       = ['Joan Martinez, Tobias Bielohlawek']
   spec.email         = ['joan.martinez.ripoll@gmail.com']
 
