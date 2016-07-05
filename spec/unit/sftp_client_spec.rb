@@ -14,16 +14,16 @@ RSpec.describe Idnow::SftpClient do
 
     before do
       allow(Net::SFTP).to receive(:start).and_yield(sftp_double)
-      allow(sftp_double).to receive_message_chain(:dir, :[]) { file_in_sftp_dir }
+      allow(sftp_client).to receive(:file_exists).and_return file_exists
     end
 
     context 'when the file does not exist' do
-      let(:file_in_sftp_dir) { [] }
+      let(:file_exists) { false }
       it { expect { subject }.to raise_error(Idnow::Exception) }
     end
 
     context 'when the file exists' do
-      let(:file_in_sftp_dir) { [path] }
+      let(:file_exists) { true }
       context 'when a sftp exception happens' do
         before do
           allow(sftp_double).to receive(:download!).and_raise(Net::SFTP::Exception)
