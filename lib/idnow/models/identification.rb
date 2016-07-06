@@ -1,5 +1,5 @@
 require 'forwardable'
-require 'pry'
+
 module Idnow
   class Identification
     extend Forwardable
