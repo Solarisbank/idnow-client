@@ -19,10 +19,15 @@ module Idnow
       @streetnumber = dig_value('address', 'streetnumber', data)
       @title        = dig_value('title', data)
       @zipcode      = dig_value('address', 'zipcode', data)
+      @raw_data     = data
     end
 
     def address
       "#{street} #{streetnumber}, #{zipcode} #{city}, #{country}"
+    end
+
+    def address_changed?
+      @raw_data['address'].values.any? { |field| field['status'] == 'CHANGE' }
     end
 
     private
