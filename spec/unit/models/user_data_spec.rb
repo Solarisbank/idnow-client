@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Idnow::UserData do
-  let(:user_data) { build(:idnow_identification).user_data }
+  let(:user_data) { idnow_identification.user_data }
+  let(:idnow_identification) { build(:idnow_identification) }
 
   describe '#address' do
     subject { user_data.address }
@@ -71,5 +72,21 @@ RSpec.describe Idnow::UserData do
   describe '#title' do
     subject { user_data.title }
     it { is_expected.to eq 'TITLE' }
+  end
+
+  describe 'address_changed?' do
+    subject { user_data.address_changed? }
+    let(:idnow_identification) { build(:idnow_identification, idnow_identification_hash: idnow_identification_hash) }
+    let(:idnow_identification_hash) { build(:idnow_identification_hash).tap { |h| h['userdata']['address']['city']['status'] = status } }
+
+    context 'status is changed' do
+      let(:status) { 'CHANGE' }
+      it { is_expected.to be true }
+    end
+
+    context 'status is unchanged' do
+      let(:status) { 'MATCH' }
+      it { is_expected.to be false }
+    end
   end
 end
