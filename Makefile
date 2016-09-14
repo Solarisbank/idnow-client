@@ -1,12 +1,7 @@
-DOCKER_TAG=solarisbank/idnow-client-test
+test: rspec
 
 rspec:
-	docker run -t $(DOCKER_TAG) rspec
+	bundle exec rspec
 
 rubocop:
-	docker run -t $(DOCKER_TAG) rubocop
-
-test: rubocop rspec
-
-build:
-	docker build -t $(DOCKER_TAG) -f ci/Dockerfile .
+	bundle exec rubocop
