@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'idnow/modules/jsonable'
 require 'idnow/client'
 
@@ -37,14 +38,6 @@ module Idnow
     test: {
       host: Host::TEST_SERVER,
       target_host: TargetHost::TEST_SERVER
-    },
-    test2: {
-      host: 'https://gateway.test2.idnow.de'.freeze,
-      target_host: 'https://go.test2.idnow.de'.freeze
-    },
-    test3: {
-      host: 'https://gateway.test3.idnow.de'.freeze,
-      target_host: 'https://go.test3.idnow.de'.freeze
     },
     live: {
       host: Host::LIVE_SERVER,
