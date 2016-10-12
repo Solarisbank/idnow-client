@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'idnow/API/authentication'
 require 'idnow/API/automated_testing' # shouldn't be included by default
 require 'idnow/API/request_identifications'

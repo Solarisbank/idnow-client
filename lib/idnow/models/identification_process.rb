@@ -23,7 +23,7 @@ module Idnow
     end
 
     def review_pending?
-      result == 'REVIEW_PENDING'
+      result == 'REVIEW_PENDING' || result == 'FRAUD_SUSPICION_PENDING'
     end
   end
 end

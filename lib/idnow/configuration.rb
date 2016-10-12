@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Idnow
   class Configuration
     # TODO: This class is not being used right now, but its aim is to be able for the developers
