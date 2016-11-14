@@ -10,6 +10,6 @@ RSpec.describe Idnow::ContactData do
 
   describe '#mobilephone' do
     subject { contact_data.mobilephone }
-    it { is_expected.to eq '+4915193875727462264' }
+    it { is_expected.to eq '+4915193875727' }
   end
 end

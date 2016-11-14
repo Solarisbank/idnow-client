@@ -65,7 +65,7 @@ FactoryGirl.define do
             "custom5": null
           },
           "contactdata": {
-            "mobilephone": "+4915193875727462264",
+            "mobilephone": "+4915193875727",
             "email": "petra.meier@example.com"
           },
           "userdata": {
