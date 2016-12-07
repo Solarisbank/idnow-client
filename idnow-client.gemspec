@@ -2,9 +2,9 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = '1.3.1'
+  spec.version       = '2.0.0'
   spec.authors       = ['Joan Martinez, Tobias Bielohlawek']
-  spec.email         = ['joan.martinez.ripoll@gmail.com']
+  spec.email         = ['joan.martinez@solarisbank.de']
 
   spec.summary       = 'Ruby client for the IDnow API'
   spec.description   = 'Library to consume the IDnow API in Ruby, http://www.idnow.eu/developers'
@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'net-sftp', '~>2.1'
+
+  spec.required_ruby_version = '~> 2.3'
 
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'webmock', '~> 1.22'

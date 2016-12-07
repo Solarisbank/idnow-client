@@ -4,12 +4,12 @@ module Idnow
 
     attr_accessor :country, :number, :issued_by, :date_issued, :type, :valid_until
     def initialize(data)
-      @country             = dig_value('country', data)
-      @number              = dig_value('number', data)
-      @issued_by           = dig_value('issuedby', data)
-      @date_issued         = dig_value('dateissued', data)
-      @type                = dig_value('type', data)
-      @valid_until         = dig_value('validuntil', data)
+      @country     = data.dig('country', 'value')
+      @number      = data.dig('number', 'value')
+      @issued_by   = data.dig('issuedby', 'value')
+      @date_issued = data.dig('dateissued', 'value')
+      @type        = data.dig('type', 'value')
+      @valid_until = data.dig('validuntil', 'value')
     end
 
     def date_issued
@@ -18,17 +18,6 @@ module Idnow
 
     def valid_until
       Date.parse(@valid_until) if @valid_until
-    end
-
-    private
-
-    def dig_value(*keys, data)
-      # TODO: use ruby 2.3 and dig
-      result = data
-      keys.each do |key|
-        result = result.fetch(key, {})
-      end
-      result['value']
     end
   end
 end

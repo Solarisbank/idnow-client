@@ -48,11 +48,13 @@ client = Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key
 ```
 
 ## API Summary
-Please read the official IDnow documentation for details. Some examples can also be found at the examples folder.
+Please read the official IDnow documentation for details. Some examples can also be found in the examples folder.
 
 ####Identifications
 ```ruby
-# Identification data, all fields are optional. If you want to use a testing robot instead of a real agent for the identification, write the robot name at the first_name, last_name or any custom field.
+# Identification data, all fields are optional.
+# If you want to use a testing robot instead of a real agent for the identification,
+# write the robot name at the first_name, last_name or any custom field.
 data = Idnow::IdentificationData.new({
    birthday: '1984-07-20',
    birthplace: 'Buxtehude',
@@ -86,14 +88,16 @@ Idnow.client.testing_start(transaction_number: transaction_number)
 # Testing video chat - Only needed for automated robot testing
 Idnow.client.testing_request_video_chat(transaction_number: transaction_number)
 
-# List successful identifications.  When using automated robots, keep in mind that it might take a while until the identification is completed.
+# List successful identifications. When using automated robots,
+# keep in mind that it might take a while until the identification is completed.
 Idnow.client.login
 Idnow.client.list_identifications
 
 # List identifications by status pending or failed
 Idnow.client.list_identifications(status: 'pending')
 
-# Get identification. When using automated robots, keep in mind that it might take a while until the identification is completed.
+# Get identification. When using automated robots,
+# keep in mind that it might take a while until the identification is completed.
 Idnow.client.get_identification(transaction_number: transaction_number)
 
 # Download identification files
