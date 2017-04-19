@@ -10,7 +10,8 @@ module Idnow
 
     attr_accessor :birthplace, :birthname, :city, :country, :custom1,
                   :custom2, :custom3, :custom4, :custom5, :trackingid, :email, :firstname, :gender,
-                  :lastname, :mobilephone, :nationality, :street, :streetnumber, :title, :zipcode
+                  :lastname, :mobilephone, :nationality, :street, :streetnumber, :title, :zipcode,
+                  :preferredLang
 
     def initialize(params = {})
       params.keys.each do |key|
