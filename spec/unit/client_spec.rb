@@ -3,11 +3,32 @@ require 'spec_helper'
 RSpec.describe Idnow::Client do
   let(:client) { Idnow::Client.new(env: env, company_id: company_id, api_key: api_key) }
   let(:env) { :test }
+  let(:expected_sftp_host) { Idnow::Host::TEST_SERVER }
   let(:company_id) { 'solaris' }
   let(:api_key) { 'api_key' }
 
   it 'has pending and failed identification statuses' do
     expect(Idnow::Client::IDENTIFICATION_STATUSES - %w(failed pending)).to be_empty
+  end
+
+  describe '.initialize' do
+    context 'when a timeout option is passed' do
+      it 'initializes Idnow::SftpClient with that timeout' do
+        expect(Idnow::SftpClient).to receive(:new)
+          .with(host: expected_sftp_host, username: company_id, password: api_key, timeout: 123)
+
+        Idnow::Client.new(env: env, company_id: company_id, api_key: api_key, timeout: 123)
+      end
+    end
+
+    context 'when no timeout option is passed' do
+      it 'initializes Idnow::SftpClient with no timeout' do
+        expect(Idnow::SftpClient).to receive(:new)
+          .with(host: expected_sftp_host, username: company_id, password: api_key)
+
+        Idnow::Client.new(env: env, company_id: company_id, api_key: api_key)
+      end
+    end
   end
 
   describe '#list_identifications' do
