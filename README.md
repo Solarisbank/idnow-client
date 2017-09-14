@@ -1,6 +1,6 @@
 # Idnow Client
-Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 
+Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
 
 ## Installation
 
@@ -17,7 +17,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install idnow
-
 
 ## Configuration
 
@@ -48,9 +47,11 @@ client = Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key
 ```
 
 ## API Summary
+
 Please read the official IDnow documentation for details. Some examples can also be found in the examples folder.
 
-####Identifications
+#### Identifications
+
 ```ruby
 # Identification data, all fields are optional.
 # If you want to use a testing robot instead of a real agent for the identification,
@@ -102,10 +103,10 @@ Idnow.client.get_identification(transaction_number: transaction_number)
 
 # Download identification files
 Idnow.client.download_identification(transaction_number: transaction_number)
-
 ```
 
-####Esigning
+#### Esigning
+
 ```ruby
 # Create document definition
 document_identifier = "doc_id"
@@ -136,11 +137,23 @@ Idnow.client.upload_default_document(document_identifier, file_data)
 Idnow.client.download_default_document(document_identifier)
 ```
 
-
-## Development
+## Development & testing
 
 RSpec is used for testing.
+
+### Coverage report
+
 To enable code coverage check, set COV environment variable:
 
-```COV=true bundle exec rspec```
+```sh
+COV=true make test
+```
 
+### Testing with docker
+
+To run the tests through docker, you can use the included `Dockerfile`:
+
+```sh
+docker build . -t idnow-client
+docker run -it idnow-client:latest make test
+```
