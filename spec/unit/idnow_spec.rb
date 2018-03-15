@@ -5,6 +5,7 @@ RSpec.describe Idnow do
     Idnow.instance_variable_set(:@env, nil)
     Idnow.instance_variable_set(:@company_id, nil)
     Idnow.instance_variable_set(:@api_key, nil)
+    Idnow.instance_variable_set(:@custom_environments, nil)
     Idnow.instance_variable_set(:@client, nil)
   end
 
@@ -55,6 +56,21 @@ RSpec.describe Idnow do
 
     it 'sets api_key' do
       expect { subject }.to change { Idnow.instance_variable_get(:@api_key) }.to(api_key)
+    end
+  end
+
+  describe '.custom_environments=' do
+    subject { Idnow.custom_environments = custom_environments }
+
+    let(:custom_environments) { {test: {}, live: {}} }
+
+    it 'resets client' do
+      Idnow.instance_variable_set(:@client, 'dummy')
+      expect { subject }.to change { Idnow.instance_variable_get(:@client) }.to(nil)
+    end
+
+    it 'sets custom_environments' do
+      expect { subject }.to change { Idnow.instance_variable_get(:@custom_environments) }.to(custom_environments)
     end
   end
 

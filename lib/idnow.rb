@@ -61,9 +61,18 @@ module Idnow
     @api_key = api_key
   end
 
+  def custom_environments=(custom_environments)
+    @client = nil
+    @custom_environments = custom_environments
+  end
+
+  def endpoint(env, host)
+    (@custom_environments || {}).dig(env, host) || Idnow::ENVIRONMENTS[env][host]
+  end
+
   def client
     @client ||= Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key)
   end
 
-  module_function :env=, :company_id=, :api_key=, :client
+  module_function :env=, :company_id=, :api_key=, :custom_environments=, :endpoint, :client
 end
