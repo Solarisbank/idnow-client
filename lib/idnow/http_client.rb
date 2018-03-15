@@ -21,7 +21,7 @@ module Idnow
     def client
       Net::HTTP.new(@uri.host, @uri.port).tap do |http|
         http.read_timeout = @read_timeout
-        http.use_ssl      = true
+        http.use_ssl      = @uri.scheme == 'https'
       end
     end
   end
