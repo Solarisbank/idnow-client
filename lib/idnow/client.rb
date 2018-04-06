@@ -25,8 +25,8 @@ module Idnow
       fail 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
       fail 'Please set your company_id' if company_id.nil?
       fail 'Please set your api_key' if api_key.nil?
-      @host        = Idnow::ENVIRONMENTS[env][:host]
-      @target_host = Idnow::ENVIRONMENTS[env][:target_host]
+      @host        = Idnow.endpoint(env, :host)
+      @target_host = Idnow.endpoint(env, :target_host)
       @company_id  = company_id
       @api_key     = api_key
 

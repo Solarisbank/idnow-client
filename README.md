@@ -31,6 +31,7 @@ The Idnow client takes three settings:
 
 *  **company_id**
 *  **api_key**
+*  **custom_environments** (optional)
 
 You have the option of using a global singleton client:
 
@@ -38,6 +39,18 @@ You have the option of using a global singleton client:
 Idnow.env = :test
 Idnow.company_id = "mycompany"
 Idnow.api_key = "1234api_key"
+
+# optional
+Idnow.custom_environments = {
+  test: {
+    host:        'https://gateway.test.idnow.example.com',
+    target_host: 'https://go.test.idnow.example.com'
+  },
+  live: {
+    host:        'https://gateway.idnow.example.com',
+    target_host: 'https://go.idnow.example.com'
+  }
+}
 ```
 
 Or many clients can be initialized with:

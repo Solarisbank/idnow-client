@@ -29,6 +29,23 @@ RSpec.describe Idnow::Client do
         Idnow::Client.new(env: env, company_id: company_id, api_key: api_key)
       end
     end
+
+    context 'when a custom set of endpoints is configured' do
+      around do |example|
+        Idnow.custom_environments = {test: {host: 'https://gateway.test.idnow.example.com'}}
+        example.run
+        Idnow.custom_environments = nil
+      end
+
+      it 'initializes http and sftp clients with the custom hosts' do
+        expect(Idnow::HttpClient).to receive(:new)
+          .with(host: 'https://gateway.test.idnow.example.com')
+        expect(Idnow::SftpClient).to receive(:new)
+          .with(host: 'https://gateway.test.idnow.example.com', username: company_id, password: api_key)
+
+        Idnow::Client.new(env: env, company_id: company_id, api_key: api_key)
+      end
+    end
   end
 
   describe '#list_identifications' do
