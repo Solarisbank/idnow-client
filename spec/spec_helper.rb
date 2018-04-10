@@ -8,7 +8,7 @@ if ENV['COV']
 end
 
 require 'rspec'
-require 'factory_girl'
+require 'factory_bot'
 require 'webmock/rspec'
 require 'shoulda/matchers'
 
@@ -17,10 +17,10 @@ require 'idnow'
 Dir[File.join('.', 'spec', 'support', '**', '*.rb')].each { |file| require file }
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
-FactoryGirl.register_strategy(:json, JsonStrategy)
+FactoryBot.register_strategy(:json, JsonStrategy)
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

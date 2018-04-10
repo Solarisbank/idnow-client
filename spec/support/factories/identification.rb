@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :idnow_identification, class: 'Idnow::Identification' do
     skip_create
 
@@ -22,7 +22,7 @@ FactoryGirl.define do
   end
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :idnow_identification_hash, class: 'Hash' do
     skip_create
 
