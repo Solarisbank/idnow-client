@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.3'
 
-  spec.add_development_dependency 'factory_girl', '~> 4.5'
+  spec.add_development_dependency 'factory_bot', '~> 4.5'
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'rubocop', '~> 0.54.0'
   spec.add_development_dependency 'shoulda-matchers', '~>3.1'

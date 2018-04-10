@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :idnow_document_definition, class: 'Idnow::DocumentDefinition' do
     skip_create
 
@@ -18,7 +18,7 @@ FactoryGirl.define do
   end
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :idnow_document_definition_hash, class: 'Hash' do
     skip_create
 
