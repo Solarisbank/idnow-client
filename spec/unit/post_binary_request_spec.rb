@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Idnow::PostBinaryRequest do
   let(:path) { 'api/v1/company_id/identifications/any/path' }
-  let(:data) { %w(some thing).pack('B*') }
+  let(:data) { %w[some thing].pack('B*') }
   let(:post_request) { Idnow::PostBinaryRequest.new(path, data) }
 
   describe '#new' do

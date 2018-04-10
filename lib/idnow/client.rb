@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'idnow/API/authentication'
 require 'idnow/API/automated_testing' # shouldn't be included by default
 require 'idnow/API/request_identifications'
@@ -17,14 +18,14 @@ module Idnow
     include Idnow::API::UploadDocuments
     include Idnow::API::DownloadDocuments
 
-    API_VERSION = 'v1'.freeze
+    API_VERSION = 'v1'
 
     attr_reader :host
 
     def initialize(env:, company_id:, api_key:, timeout: nil)
-      fail 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
-      fail 'Please set your company_id' if company_id.nil?
-      fail 'Please set your api_key' if api_key.nil?
+      raise 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
+      raise 'Please set your company_id' if company_id.nil?
+      raise 'Please set your api_key' if api_key.nil?
       @host        = Idnow.endpoint(env, :host)
       @target_host = Idnow.endpoint(env, :target_host)
       @company_id  = company_id
@@ -49,7 +50,7 @@ module Idnow
                  end
 
       response.tap do |r|
-        fail Idnow::ResponseException, r.errors if r.errors?
+        raise Idnow::ResponseException, r.errors if r.errors?
       end
     end
 

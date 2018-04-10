@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   class RawResponse
     attr_reader :raw
@@ -23,9 +25,9 @@ module Idnow
 
     def valid_json?(json)
       JSON.parse(json)
-      return true
+      true
     rescue JSON::ParserError
-      return false
+      false
     end
   end
 end

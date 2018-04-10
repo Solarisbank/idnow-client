@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'bundler/setup'
 if ENV['COV']
   require 'simplecov'
@@ -46,9 +48,7 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   # Make sure we don't commit focused specs
-  if ENV['CI']
-    config.before(:example, :focus) { fail 'Dare you committing focused specs :)' }
-  end
+  config.before(:example, :focus) { raise 'Dare you committing focused specs :)' } if ENV['CI']
 end
 
 Shoulda::Matchers.configure do |config|

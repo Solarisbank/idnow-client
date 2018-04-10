@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   class IdentificationRequest
     attr_accessor :id, :transaction_number

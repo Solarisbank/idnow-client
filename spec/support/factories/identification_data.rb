@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :idnow_identification_data, class: 'Idnow::IdentificationData' do
     skip_create

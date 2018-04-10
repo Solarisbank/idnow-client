@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'idnow/modules/jsonable'
 require 'idnow/client'
 
@@ -24,14 +25,16 @@ require 'idnow/models/login_data'
 require 'idnow/models/document_definition'
 
 module Idnow
-  module Host # Used to request an identification through the idnow API
-    TEST_SERVER = 'https://gateway.test.idnow.de'.freeze
-    LIVE_SERVER = 'https://gateway.idnow.de'.freeze
+  # Used to request an identification through the idnow API
+  module Host
+    TEST_SERVER = 'https://gateway.test.idnow.de'
+    LIVE_SERVER = 'https://gateway.idnow.de'
   end
 
-  module TargetHost # Used for redirecting the user to the identification process
-    TEST_SERVER = 'https://go.test.idnow.de'.freeze
-    LIVE_SERVER = 'https://go.idnow.de'.freeze
+  # Used for redirecting the user to the identification process
+  module TargetHost
+    TEST_SERVER = 'https://go.test.idnow.de'
+    LIVE_SERVER = 'https://go.idnow.de'
   end
 
   ENVIRONMENTS = {
@@ -46,7 +49,7 @@ module Idnow
   }.freeze
 
   def env=(env)
-    fail ArgumentError, 'Please provide a valid enviroment, :test or :live' unless ENVIRONMENTS.keys.include?(env)
+    raise ArgumentError, 'Please provide a valid enviroment, :test or :live' unless ENVIRONMENTS.keys.include?(env)
     @client = nil
     @env = env
   end

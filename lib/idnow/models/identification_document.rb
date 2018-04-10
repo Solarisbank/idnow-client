@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 module Idnow
   class IdentificationDocument
     include Idnow::Jsonable
 
-    attr_accessor :country, :number, :issued_by, :date_issued, :type, :valid_until
+    attr_accessor :country, :number, :issued_by, :type
+    attr_writer :date_issued, :valid_until
+
     def initialize(data)
       @country     = data.dig('country', 'value')
       @number      = data.dig('number', 'value')

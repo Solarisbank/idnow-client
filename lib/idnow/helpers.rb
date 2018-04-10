@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   module Helpers
     PROJECT_ROOT = File.dirname(File.dirname(File.dirname(__FILE__)))

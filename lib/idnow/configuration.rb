@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Idnow
   class Configuration
     # TODO: This class is not being used right now, but its aim is to be able for the developers
@@ -15,8 +16,8 @@ module Idnow
 
     module Idnow
       module Host
-        TEST = 'https://gateway.test.idnow.de'.freeze
-        PRODUCTION = 'https://gateway.idnow.de'.freeze
+        TEST = 'https://gateway.test.idnow.de'
+        PRODUCTION = 'https://gateway.idnow.de'
       end
     end
     attr_accessor :host

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Idnow
   class IdentificationProcess
     include Idnow::Jsonable
 
-    SUCCESSFUL_RESPONSES = %w(SUCCESS SUCCESS_DATA_CHANGED).freeze
+    SUCCESSFUL_RESPONSES = %w[SUCCESS SUCCESS_DATA_CHANGED].freeze
     attr_accessor :result, :reason, :company_id, :filename, :agentname, :identification_time, :id, :href, :type, :transaction_number
 
     def initialize(data)

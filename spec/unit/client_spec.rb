@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Idnow::Client do
@@ -8,7 +10,7 @@ RSpec.describe Idnow::Client do
   let(:api_key) { 'api_key' }
 
   it 'has pending and failed identification statuses' do
-    expect(Idnow::Client::IDENTIFICATION_STATUSES - %w(failed pending)).to be_empty
+    expect(Idnow::Client::IDENTIFICATION_STATUSES - %w[failed pending]).to be_empty
   end
 
   describe '.initialize' do
@@ -32,7 +34,7 @@ RSpec.describe Idnow::Client do
 
     context 'when a custom set of endpoints is configured' do
       around do |example|
-        Idnow.custom_environments = {test: {host: 'https://gateway.test.idnow.example.com'}}
+        Idnow.custom_environments = { test: { host: 'https://gateway.test.idnow.example.com' } }
         example.run
         Idnow.custom_environments = nil
       end
@@ -175,44 +177,48 @@ RSpec.describe Idnow::Client do
 
   describe 'list_cached_document_definitions' do
     subject { client.list_cached_document_definitions(refresh) }
+
     let(:refresh) { false }
+
     before do
       client.instance_variable_set(:@auth_token, 'token')
-      allow(client).to receive(:list_document_definitions).and_return(%w(doc1 doc2))
+      allow(client).to receive(:list_document_definitions).and_return(%w[doc1 doc2])
     end
 
     context 'when the document definitions are not cached' do
-      before { client.instance_variable_set(:@document_definitions, nil) }
+      before { client.instance_variable_set(:@list_cached_document_definitions, nil) }
+
       it 'calls list_document_definitions' do
-        expect(client).to receive(:list_document_definitions).and_return(%w(doc1 doc2))
+        expect(client).to receive(:list_document_definitions).and_return(%w[doc1 doc2])
         subject
       end
 
-      it 'sets @document_definitions' do
+      it 'sets @list_cached_document_definitions' do
         subject
-        expect(client.instance_variable_get(:@document_definitions)).to eq %w(doc1 doc2)
+        expect(client.instance_variable_get(:@list_cached_document_definitions)).to eq %w[doc1 doc2]
       end
 
       it 'returns the document definitions' do
-        expect(subject).to eq(%w(doc1 doc2))
+        expect(subject).to eq(%w[doc1 doc2])
       end
     end
 
     context 'when the document definitions are cached' do
-      before { client.instance_variable_set(:@document_definitions, %w(doc1 doc2)) }
+      before { client.instance_variable_set(:@list_cached_document_definitions, %w[doc1 doc2]) }
+
       it 'does not call list_document_definitions' do
         expect(client).not_to receive(:list_document_definitions)
         subject
       end
 
-      it { is_expected.to eq %w(doc1 doc2) }
+      it { is_expected.to eq %w[doc1 doc2] }
     end
 
     context 'when the refresh flag is true' do
       let(:refresh) { true }
 
       before do
-        client.instance_variable_set(:@document_definitions, %w(doc1 doc2))
+        client.instance_variable_set(:@list_cached_document_definitions, %w[doc1 doc2])
         allow(client).to receive(:list_document_definitions).and_return(['doc3'])
       end
 
@@ -223,7 +229,7 @@ RSpec.describe Idnow::Client do
 
       it 'updates @document_definitions' do
         subject
-        expect(client.instance_variable_get(:@document_definitions)).to eq ['doc3']
+        expect(client.instance_variable_get(:@list_cached_document_definitions)).to eq ['doc3']
       end
 
       it 'returns the document definitions' do

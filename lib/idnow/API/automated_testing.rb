@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 module Idnow
   module API
     module AutomatedTesting
-      HOST = 'https://api.test.idnow.de'.freeze
+      HOST = 'https://api.test.idnow.de'
 
       def testing_start(transaction_number:)
         path = full_path_for("identifications/#{transaction_number}/start")
