@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'stub external soap client calls', :stub_connect do
   let(:client) { Idnow::Client.new(env: env, company_id: company_id, api_key: api_key) }
   let(:env) { :test }

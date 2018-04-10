@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :idnow_document_definition, class: 'Idnow::DocumentDefinition' do
     skip_create

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Idnow do
@@ -62,7 +64,7 @@ RSpec.describe Idnow do
   describe '.custom_environments=' do
     subject { Idnow.custom_environments = custom_environments }
 
-    let(:custom_environments) { {test: {}, live: {}} }
+    let(:custom_environments) { { test: {}, live: {} } }
 
     it 'resets client' do
       Idnow.instance_variable_set(:@client, 'dummy')

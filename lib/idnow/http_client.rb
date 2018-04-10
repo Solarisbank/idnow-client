@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   class HttpClient
     def initialize(host:, read_timout_sec: 30)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   module API
     module UploadDocuments
@@ -14,7 +16,7 @@ module Idnow
       private
 
       def upload_document(file_data, request_path)
-        fail Idnow::AuthenticationException if @auth_token.nil?
+        raise Idnow::AuthenticationException if @auth_token.nil?
         request = Idnow::PostBinaryRequest.new(request_path, file_data)
         execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
       end

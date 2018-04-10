@@ -1,21 +1,24 @@
 # frozen_string_literal: true
+
 require 'json'
 
 module Idnow
   class IdentificationData
     module Gender
-      MALE = 'MALE'.freeze
-      FEMALE = 'FEMALE'.freeze
+      MALE = 'MALE'
+      FEMALE = 'FEMALE'
     end
 
-    attr_accessor :birthplace, :birthname, :city, :country, :custom1,
-                  :custom2, :custom3, :custom4, :custom5, :trackingid, :email, :firstname, :gender,
+    attr_accessor :birthplace, :birthname, :city, :custom1,
+                  :custom2, :custom3, :custom4, :custom5, :trackingid, :email, :firstname,
                   :lastname, :mobilephone, :nationality, :street, :streetnumber, :title, :zipcode,
                   :preferredLang
 
+    attr_reader :country, :gender
+
     def initialize(params = {})
       params.keys.each do |key|
-        fail ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
+        raise ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
 
         send("#{key}=", params[key])
       end
@@ -32,7 +35,7 @@ module Idnow
     ########### Getter / Setter ############
 
     def birthday
-      @birthday.strftime('%Y-%m-%d') if @birthday
+      @birthday&.strftime('%Y-%m-%d')
     end
 
     def birthday=(birthday)
@@ -44,18 +47,18 @@ module Idnow
     end
 
     def country=(country)
-      fail ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
+      raise ArgumentError, 'Country must be ISO 3166 two letter country code' unless country.instance_of?(String) && country.size == 2
 
       @country = country.upcase
     end
 
     def gender=(gender)
-      if %w(M MALE).include?(gender.to_s.strip.upcase)
+      if %w[M MALE].include?(gender.to_s.strip.upcase)
         @gender = Gender::MALE
-      elsif %w(F FEMALE).include?(gender.to_s.strip.upcase)
+      elsif %w[F FEMALE].include?(gender.to_s.strip.upcase)
         @gender = Gender::FEMALE
       else
-        fail ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
+        raise ArgumentError, 'Provide valid value for gender: MALE or FEMALE'
       end
     end
   end

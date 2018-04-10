@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   class Exception < StandardError
     def initialize(message)

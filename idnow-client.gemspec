@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Ruby client for the IDnow API'
   spec.description   = 'Library to consume the IDnow API in Ruby, http://www.idnow.eu/developers'
 
-  fail 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless spec.respond_to?(:metadata)
+  raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless spec.respond_to?(:metadata)
 
   spec.homepage      = 'https://github.com/solarisBank/idnow-client'
   spec.license       = 'MIT'
@@ -23,10 +23,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.3'
 
-  spec.add_development_dependency 'rspec', '~> 3.3'
-  spec.add_development_dependency 'webmock', '~> 1.22'
-  spec.add_development_dependency 'simplecov', '~> 0.10'
-  spec.add_development_dependency 'rubocop', '~> 0.36.0'
   spec.add_development_dependency 'factory_girl', '~> 4.5'
+  spec.add_development_dependency 'rspec', '~> 3.3'
+  spec.add_development_dependency 'rubocop', '~> 0.54.0'
   spec.add_development_dependency 'shoulda-matchers', '~>3.1'
+  spec.add_development_dependency 'simplecov', '~> 0.10'
+  spec.add_development_dependency 'webmock', '~> 1.22'
 end

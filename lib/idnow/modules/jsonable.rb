@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Idnow
   module Jsonable
     def to_h
