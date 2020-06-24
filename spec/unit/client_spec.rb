@@ -32,6 +32,15 @@ RSpec.describe Idnow::Client do
       end
     end
 
+    context 'when custom sftp_options are defined' do
+      it 'initializes Idnow::SftpClient with those options' do
+        expect(Idnow::SftpClient).to receive(:new)
+          .with(host: expected_sftp_host, username: company_id, password: api_key, options: { verbose: Logger::DEBUG })
+
+        Idnow::Client.new(env: env, company_id: company_id, api_key: api_key, sftp_options: { verbose: Logger::DEBUG })
+      end
+    end
+
     context 'when a custom set of endpoints is configured' do
       around do |example|
         Idnow.custom_environments = { test: { host: 'https://gateway.test.idnow.example.com' } }
