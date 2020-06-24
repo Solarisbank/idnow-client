@@ -12,7 +12,7 @@ RSpec.describe Idnow::SftpClient do
 
   describe '.initialize' do
     context 'when a timeout option is passed' do
-      let(:sftp_client) { Idnow::SftpClient.new(host: host, username: username, password: password, timeout: 123) }
+      let(:sftp_client) { Idnow::SftpClient.new(host: host, username: username, password: password, options: { timeout: 123 }) }
 
       it 'starts Net::SFTP with that timeout' do
         expect(Net::SFTP).to receive(:start)

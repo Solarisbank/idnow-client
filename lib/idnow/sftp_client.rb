@@ -4,17 +4,16 @@ require 'net/sftp'
 
 module Idnow
   class SftpClient
-    def initialize(host:, username:, password:, timeout: nil)
+    def initialize(host:, username:, password:, options: {})
       @host = URI.parse(host).host
       @username = username
       @password = password
-      @timeout = timeout
+      @options = options
     end
 
     def download(file_name)
       data = nil
-      options = { password: @password }
-      options[:timeout] = @timeout if @timeout
+      options = @options.merge(password: @password)
       Net::SFTP.start(@host, @username, options) do |sftp|
         raise Idnow::Exception, "Invalid path. No identification file found under #{file_name}" unless file_exists(sftp, file_name)
         begin
