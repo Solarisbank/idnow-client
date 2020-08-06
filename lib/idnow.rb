@@ -64,6 +64,11 @@ module Idnow
     @api_key = api_key
   end
 
+  def sftp_options=(sftp_options)
+    @client = nil
+    @sftp_options = sftp_options
+  end
+
   def custom_environments=(custom_environments)
     @client = nil
     @custom_environments = custom_environments
@@ -74,8 +79,8 @@ module Idnow
   end
 
   def client
-    @client ||= Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key)
+    @client ||= Idnow::Client.new(env: @env, company_id: @company_id, api_key: @api_key, sftp_options: @sftp_options || {})
   end
 
-  module_function :env=, :company_id=, :api_key=, :custom_environments=, :endpoint, :client
+  module_function :env=, :company_id=, :api_key=, :sftp_options=, :custom_environments=, :endpoint, :client
 end

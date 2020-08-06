@@ -22,7 +22,7 @@ module Idnow
 
     attr_reader :host
 
-    def initialize(env:, company_id:, api_key:, timeout: nil)
+    def initialize(env:, company_id:, api_key:, timeout: nil, sftp_options: {})
       raise 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
       raise 'Please set your company_id' if company_id.nil?
       raise 'Please set your api_key' if api_key.nil?
@@ -33,9 +33,8 @@ module Idnow
 
       @http_client = HttpClient.new(host: @host)
 
-      sftp_client_options = { host: @host, username: @company_id, password: @api_key }
-      sftp_client_options[:timeout] = timeout if timeout
-      @sftp_client = SftpClient.new(sftp_client_options)
+      sftp_options[:timeout] = timeout if timeout
+      @sftp_client = SftpClient.new(host: @host, username: @company_id, password: @api_key, options: sftp_options)
     end
 
     private

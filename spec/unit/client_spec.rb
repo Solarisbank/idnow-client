@@ -17,7 +17,7 @@ RSpec.describe Idnow::Client do
     context 'when a timeout option is passed' do
       it 'initializes Idnow::SftpClient with that timeout' do
         expect(Idnow::SftpClient).to receive(:new)
-          .with(host: expected_sftp_host, username: company_id, password: api_key, timeout: 123)
+          .with(host: expected_sftp_host, username: company_id, password: api_key, options: { timeout: 123 })
 
         Idnow::Client.new(env: env, company_id: company_id, api_key: api_key, timeout: 123)
       end
@@ -26,9 +26,18 @@ RSpec.describe Idnow::Client do
     context 'when no timeout option is passed' do
       it 'initializes Idnow::SftpClient with no timeout' do
         expect(Idnow::SftpClient).to receive(:new)
-          .with(host: expected_sftp_host, username: company_id, password: api_key)
+          .with(host: expected_sftp_host, username: company_id, password: api_key, options: {})
 
         Idnow::Client.new(env: env, company_id: company_id, api_key: api_key)
+      end
+    end
+
+    context 'when custom sftp_options are defined' do
+      it 'initializes Idnow::SftpClient with those options' do
+        expect(Idnow::SftpClient).to receive(:new)
+          .with(host: expected_sftp_host, username: company_id, password: api_key, options: { verbose: Logger::DEBUG })
+
+        Idnow::Client.new(env: env, company_id: company_id, api_key: api_key, sftp_options: { verbose: Logger::DEBUG })
       end
     end
 
@@ -43,7 +52,7 @@ RSpec.describe Idnow::Client do
         expect(Idnow::HttpClient).to receive(:new)
           .with(host: 'https://gateway.test.idnow.example.com')
         expect(Idnow::SftpClient).to receive(:new)
-          .with(host: 'https://gateway.test.idnow.example.com', username: company_id, password: api_key)
+          .with(host: 'https://gateway.test.idnow.example.com', username: company_id, password: api_key, options: {})
 
         Idnow::Client.new(env: env, company_id: company_id, api_key: api_key)
       end
