@@ -1,6 +1,6 @@
 # Idnow Client
 
-Library to consume the [IDnow API](http://www.idnow.eu/developers)  in Ruby.
+Library to consume the [IDnow API](http://www.idnow.eu/developers) in Ruby. [![Build Status](https://travis-ci.com/Solarisbank/idnow-client.svg?branch=master)](https://travis-ci.com/Solarisbank/idnow-client)
 
 ## Installation
 
