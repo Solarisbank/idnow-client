@@ -35,14 +35,11 @@ RSpec.describe Idnow::IdentificationData do
       it { is_expected.to eq('1984-05-19') }
     end
 
-    # rubocop:disable Style/DateTime
     context 'when DateTime object is given' do
       before { object.birthday = DateTime.new(1984, 5, 19, 16, 30, 45) }
 
       it { is_expected.to eq('1984-05-19') }
     end
-    # rubocop:enable Style/DateTime
-
     context 'when parsable String is given' do
       before { object.birthday = '1984-05-19, 16:30 CEST' }
 

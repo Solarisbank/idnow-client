@@ -17,6 +17,7 @@ module Idnow
 
       def upload_document(file_data, request_path)
         raise Idnow::AuthenticationException if @auth_token.nil?
+
         request = Idnow::PostBinaryRequest.new(request_path, file_data)
         execute(request, { 'X-API-LOGIN-TOKEN' => @auth_token })
       end

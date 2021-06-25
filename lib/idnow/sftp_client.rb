@@ -16,6 +16,7 @@ module Idnow
       options = @options.merge(password: @password)
       Net::SFTP.start(@host, @username, options) do |sftp|
         raise Idnow::Exception, "Invalid path. No identification file found under #{file_name}" unless file_exists(sftp, file_name)
+
         begin
           data = sftp.download!(file_name)
         rescue Net::SFTP::Exception => e

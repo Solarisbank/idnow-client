@@ -26,6 +26,7 @@ module Idnow
       raise 'Please set env to :test or :live' unless Idnow::ENVIRONMENTS.keys.include?(env)
       raise 'Please set your company_id' if company_id.nil?
       raise 'Please set your api_key' if api_key.nil?
+
       @host        = Idnow.endpoint(env, :host)
       @target_host = Idnow.endpoint(env, :target_host)
       @company_id  = company_id

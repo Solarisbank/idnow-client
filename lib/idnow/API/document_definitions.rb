@@ -22,8 +22,9 @@ module Idnow
         end
       end
 
-      def list_cached_document_definitions(refresh = false)
+      def list_cached_document_definitions(refresh = false) # rubocop:disable Style/OptionalBooleanParameter
         return @list_cached_document_definitions = list_document_definitions if refresh
+
         @list_cached_document_definitions ||= list_document_definitions
       end
     end

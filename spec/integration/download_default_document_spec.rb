@@ -37,7 +37,7 @@ RSpec.describe 'download default document', :stub_connect do
           "message": null
           }]
         }
-        JSON
+      JSON
     end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }

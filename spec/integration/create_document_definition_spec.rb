@@ -7,11 +7,11 @@ RSpec.describe 'create document definition', :stub_connect do
 
   let(:document_data) do
     {
-      "optional": true,
-      "name": 'SomeDoc',
-      "identifier": 'sdoc1',
-      "mimeType": 'text/rtf',
-      "sortOrder": 1
+      optional: true,
+      name: 'SomeDoc',
+      identifier: 'sdoc1',
+      mimeType: 'text/rtf',
+      sortOrder: 1
     }
   end
 
@@ -45,7 +45,7 @@ RSpec.describe 'create document definition', :stub_connect do
           "message": null
           }]
         }
-        JSON
+      JSON
     end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }

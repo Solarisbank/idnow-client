@@ -9,22 +9,24 @@ module Idnow
       FEMALE = 'FEMALE'
     end
 
+    # rubocop:disable Naming/MethodName
     attr_accessor :birthplace, :birthname, :city, :custom1,
                   :custom2, :custom3, :custom4, :custom5, :trackingid, :email, :firstname,
                   :lastname, :mobilephone, :nationality, :street, :streetnumber, :title, :zipcode,
                   :preferredLang
+    # rubocop:enable Naming/MethodName
 
     attr_reader :country, :gender
 
     def initialize(params = {})
-      params.keys.each do |key|
+      params.each_key do |key|
         raise ArgumentError, "Attribute #{key} is not supported!" unless respond_to?(key.to_sym)
 
         send("#{key}=", params[key])
       end
     end
 
-    def to_json
+    def to_json(*_args)
       result = {}
       instance_variables.each do |attribute|
         result[attribute.to_s.delete('@')] = instance_variable_get(attribute)
