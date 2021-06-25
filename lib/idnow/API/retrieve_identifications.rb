@@ -14,7 +14,7 @@ module Idnow
         partial_path = status.nil? ? 'identifications' : "identifications?#{status}=true"
         path = full_path_for(partial_path)
         request = Idnow::GetRequest.new(path)
-        response = execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
+        response = execute(request, { 'X-API-LOGIN-TOKEN' => @auth_token })
         response.data['identifications'].map do |data|
           Idnow::Identification.new(data)
         end
@@ -25,7 +25,7 @@ module Idnow
 
         path = full_path_for("identifications/#{transaction_number}")
         request = Idnow::GetRequest.new(path)
-        response = execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
+        response = execute(request, { 'X-API-LOGIN-TOKEN' => @auth_token })
         Idnow::Identification.new(response.data)
       end
 

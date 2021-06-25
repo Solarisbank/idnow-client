@@ -8,7 +8,7 @@ module Idnow
 
         path = full_path_for("documentdefinitions/#{document_definition_identifier}/data")
         request = Idnow::GetRequest.new(path, '')
-        execute(request, 'X-API-LOGIN-TOKEN' => @auth_token)
+        execute(request, { 'X-API-LOGIN-TOKEN' => @auth_token })
       end
     end
   end
