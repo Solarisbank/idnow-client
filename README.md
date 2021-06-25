@@ -152,7 +152,22 @@ Idnow.client.download_default_document(document_identifier)
 
 ## Development & testing
 
-RSpec is used for testing.
+RSpec is used for testing. For easier development, the project is dockerized allowing development inisde the container.  Make use of following make targets:
+
+Create development container:
+
+```
+make build
+```
+
+Open development console
+
+```
+make dev
+```
+
+Inside the console, `rspec` or `bundle` can be executed.
+
 
 ### Coverage report
 
@@ -167,6 +182,6 @@ COV=true make test
 To run the tests through docker, you can use the included `Dockerfile`:
 
 ```sh
-docker build . -t idnow-client
+make build
 docker run -it idnow-client:latest make test
 ```

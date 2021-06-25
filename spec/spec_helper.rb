@@ -14,7 +14,7 @@ require 'shoulda/matchers'
 
 require 'idnow'
 
-Dir[File.join('.', 'spec', 'support', '**', '*.rb')].each { |file| require file }
+Dir[File.join('.', 'spec', 'support', '**', '*.rb')].sort.each { |file| require file }
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 FactoryBot.register_strategy(:json, JsonStrategy)

@@ -50,6 +50,7 @@ module Idnow
 
   def env=(env)
     raise ArgumentError, 'Please provide a valid enviroment, :test or :live' unless ENVIRONMENTS.keys.include?(env)
+
     @client = nil
     @env = env
   end

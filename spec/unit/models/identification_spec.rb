@@ -60,11 +60,11 @@ RSpec.describe Idnow::Identification do
     it 'returns an indentification process' do
       is_expected.to eq({
                           'pdf' => '28.pdf',
-                          'audiolog'    => '28.mp3',
-                          'xml'         => '28.xml',
-                          'idbackside'  => '28_idbackside.jpg',
+                          'audiolog' => '28.mp3',
+                          'xml' => '28.xml',
+                          'idbackside' => '28_idbackside.jpg',
                           'idfrontside' => '28_idfrontside.jpg',
-                          'userface'    => '28_userface.jpg'
+                          'userface' => '28_userface.jpg'
                         })
     end
   end

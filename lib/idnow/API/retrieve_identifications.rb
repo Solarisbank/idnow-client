@@ -11,6 +11,7 @@ module Idnow
         unless status.nil? || IDENTIFICATION_STATUSES.include?(status)
           raise Idnow::InvalidArguments, "Status #{status} not defined, possible options are: #{IDENTIFICATION_STATUSES.join(',')}"
         end
+
         partial_path = status.nil? ? 'identifications' : "identifications?#{status}=true"
         path = full_path_for(partial_path)
         request = Idnow::GetRequest.new(path)

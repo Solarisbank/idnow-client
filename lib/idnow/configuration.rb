@@ -10,9 +10,7 @@ module Idnow
     # config.company_id = company_id
     # end
 
-    attr_accessor :api_key
-
-    attr_accessor :company_id
+    attr_accessor :api_key, :company_id, :host, :api_version
 
     module Idnow
       module Host
@@ -20,8 +18,5 @@ module Idnow
         PRODUCTION = 'https://gateway.idnow.de'
       end
     end
-    attr_accessor :host
-
-    attr_accessor :api_version
   end
 end

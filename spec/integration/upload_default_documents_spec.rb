@@ -39,7 +39,7 @@ RSpec.describe 'upload default documents', :stub_connect do
           "message": null
           }]
         }
-        JSON
+      JSON
     end
 
     it { expect { subject }.to raise_error(Idnow::ResponseException) }

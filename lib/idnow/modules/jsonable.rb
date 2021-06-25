@@ -14,7 +14,7 @@ module Idnow
       end
     end
 
-    def to_json
+    def to_json(*_args)
       keys_without_underscores(to_h).to_json
     end
 
@@ -22,6 +22,7 @@ module Idnow
 
     def keys_without_underscores(obj)
       return obj unless obj.is_a?(Hash)
+
       obj.each_with_object({}) do |(k, v), result|
         result[k.to_s.delete('_')] = keys_without_underscores(v)
       end

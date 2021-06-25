@@ -9,7 +9,7 @@ FactoryBot.define do
     end
 
     transient do
-      identifier 'doc1'
+      identifier { 'doc1' }
 
       idnow_document_definition_hash do
         build(:idnow_document_definition_hash, identifier: identifier)
@@ -22,7 +22,7 @@ FactoryBot.define do
   factory :idnow_document_definition_hash, class: 'Hash' do
     skip_create
 
-    identifier 'doc1'
+    identifier { 'doc1' }
     initialize_with do
       JSON.parse(<<-JSON)
         {

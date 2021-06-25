@@ -8,7 +8,7 @@ module Idnow
       @api_key = api_key
     end
 
-    def to_json
+    def to_json(*_args)
       { apiKey: @api_key }.to_json
     end
   end

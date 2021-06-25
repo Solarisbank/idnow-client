@@ -9,10 +9,10 @@ FactoryBot.define do
     end
 
     transient do
-      result 'SUCCESS'
-      reason nil
-      transaction_number '28'
-      esigning false
+      result { 'SUCCESS' }
+      reason { nil }
+      transaction_number { '28' }
+      esigning { false }
 
       idnow_identification_hash do
         build(:idnow_identification_hash, reason: reason, result: result,
@@ -26,10 +26,10 @@ FactoryBot.define do
   factory :idnow_identification_hash, class: 'Hash' do
     skip_create
 
-    result 'SUCCESS'
-    reason nil
-    transaction_number '28'
-    esigning false
+    result { 'SUCCESS' }
+    reason { nil }
+    transaction_number { '28' }
+    esigning { false }
 
     initialize_with do
       esigning_json = if esigning == false

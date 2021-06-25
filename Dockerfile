@@ -1,11 +1,7 @@
-FROM ruby:2.3-alpine
+FROM ruby:2.5
 
 RUN mkdir /gem
 WORKDIR /gem
-
-RUN apk update
-RUN apk add git build-base
-RUN gem install bundler
 
 COPY Gemfile idnow-client.gemspec /gem/
 RUN bundle install
