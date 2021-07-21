@@ -30,6 +30,14 @@ module Idnow
         Idnow::Identification.new(response.data)
       end
 
+      def get_identification_file(transaction_number:)
+        raise Idnow::AuthenticationException if @auth_token.nil?
+
+        path = full_path_for("identifications/#{transaction_number}.zip")
+        request = Idnow::GetRequest.new(path, '')
+        execute(request, { 'X-API-LOGIN-TOKEN' => @auth_token })
+      end
+
       def download_identification(transaction_number:)
         path = "#{transaction_number}.zip"
         @sftp_client.download(path)
