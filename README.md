@@ -114,8 +114,11 @@ Idnow.client.list_identifications(status: 'pending')
 # keep in mind that it might take a while until the identification is completed.
 Idnow.client.get_identification(transaction_number: transaction_number)
 
-# Download identification files
+# Download identification file via SFTP
 Idnow.client.download_identification(transaction_number: transaction_number)
+
+# Get identification file via HTTP
+Idnow.client.get_identification_file(transaction_number: transaction_number)
 ```
 
 #### Esigning
