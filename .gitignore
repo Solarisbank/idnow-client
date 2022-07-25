@@ -11,3 +11,4 @@
 /tmp/
 tags
 .*.sw?
+*.gem

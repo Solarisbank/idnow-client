@@ -6,7 +6,7 @@ on:
       - published
 
 env:
-  GEM_NAME: idnow-client
+  GEM_NAME: idnow
   RUBY_VERSION: 3.1.2
   VERSION: ${{github.event.release.tag_name}}
 
