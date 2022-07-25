@@ -33,5 +33,5 @@ puts "\n\n"
 puts '--- Testing video chat---'
 Idnow.client.testing_request_video_chat(transaction_number: transaction_number)
 
-puts 'It might take a while until the identification is marked as successfull,' \
-     ' wait a little bit and then run idnow_get_identification.rb script'
+puts 'It might take a while until the identification is marked as successfull, ' \
+     'wait a little bit and then run idnow_get_identification.rb script'

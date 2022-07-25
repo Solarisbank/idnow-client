@@ -6,7 +6,7 @@ module Idnow
 
     def initialize(raw_response)
       super
-      raw_response = raw_response == '' ? '{}' : raw_response
+      raw_response = '{}' if raw_response == ''
       @data = JSON.parse(raw_response)
     end
   end

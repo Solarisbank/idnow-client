@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'idnow'
   spec.version       = '2.4.0'
   spec.authors       = ['Joan Martinez, Tobias Bielohlawek']
-  spec.email         = ['joan.martinez@solarisbank.de']
+  spec.email         = ['developers@solarisbank.de']
 
   spec.summary       = 'Ruby client for the IDnow API'
   spec.description   = 'Library to consume the IDnow API in Ruby, http://www.idnow.eu/developers'
@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'net-sftp', '~>2.1'
-
   spec.required_ruby_version = '>= 2.7'
+
+  spec.add_runtime_dependency 'net-sftp', '~>2.1'
 
   spec.add_development_dependency 'factory_bot'
   spec.add_development_dependency 'rspec'
