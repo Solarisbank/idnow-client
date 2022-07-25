@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'idnow'
-  spec.version       = '2.4.0'
+  spec.version       = '2.4.1'
   spec.authors       = ['Joan Martinez, Tobias Bielohlawek']
   spec.email         = ['developers@solarisbank.de']
 
@@ -16,6 +16,10 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.metadata = {
+    "github_repo" => "ssh://github.com/Solarisbank/idnow-client"
+  }
 
   spec.required_ruby_version = '>= 2.7'
 
