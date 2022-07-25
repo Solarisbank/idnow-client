@@ -16,12 +16,14 @@ jobs:
     steps:
       - name: 'Validate tag pattern: ${{ env.VERSION }}'
         run: |
-          if [[${{ env.VERSION }} =~ v[0-9]+\.[0-9]+\.0\.[0-9]+ ]]; then
-            echo 'Valid tagname, continue release'
+          if [[ $VERSION =~ v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "Valid tagname, continue release"
           else
-            echo 'Invalid tagname, needs doesn't follow pattern: v<Semver>'
+            echo "Invalid tagname, needs doesn't follow pattern: v<Semver>""
             exit 1
           fi
+        env:
+          VERSION: ${{env.VERSION}}
 
   build:
     name: Build gem
